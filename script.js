@@ -1,54 +1,76 @@
-// Data Master
+// Data Master - SUDAH DIURUTKAN
 const DAFTAR_GURU = [
+    "Aji Wibowo, S.Pd",
+    "Alma Arifany, S.Li",
+    "Branka Yohanes F. Sitompul, S.Th",
+    "Budi Setiawan, M.Pd",
+    "Deni Lamria, S.H Gr",
+    "Drs. Sumanto",
+    "Endang Ruhimat, S.HI",
+    "Fernansius, S.S, M.Pd",
+    "Gunawan Surya Kusuma, S.T, M.M",
     "H. Gustian Maskat, S.Ag, M.M",
     "Husnul Khotimah, S.Ag",
-    "Endang Ruhimat, S.HI",
-    "Branka Yohanes F. Sitompul, S.Th",
-    "Deni Lamria, S.H Gr",
-    "Nuraeni, S.Pd",
-    "Budi Setiawan, M.Pd",
-    "Lilik Hendrayanto, S.Pd Gr",
-    "Rina Ajizah, S.Mat",
-    "Aji Wibowo, S.Pd",
-    "Drs. Sumanto",
-    "Muslihah Amalia, S.Pd",
-    "Luky, S.Pt",
-    "Nuris Watunnaba, S.Pd",
-    "Sulis Sulastri, S.Pd",
-    "Reynard Cahyono, B.Sc",
-    "Gunawan Surya Kusuma, S.T, M.M",
-    "Fernansius, S.S, M.Pd",
-    "Ms. Grace Sihombing, S.Pd",
-    "M. Arbi Maulana, S.Pd",
     "Jasmine Rifdah Nafilla, S.Kom",
-    "Widiya Dewi Lestari, S.Kom",
-    "Alma Arifany, S.Li",
-    "Muhammad Naufal Luthfi, S.Pd"
+    "Lilik Hendrayanto, S.Pd Gr",
+    "Luky, S.Pt",
+    "M. Arbi Maulana, S.Pd",
+    "Ms. Grace Sihombing, S.Pd",
+    "Muhammad Naufal Luthfi, S.Pd",
+    "Muslihah Amalia, S.Pd",
+    "Nuraeni, S.Pd",
+    "Nuris Watunnaba, S.Pd",
+    "Reynard Cahyono, B.Sc",
+    "Rina Ajizah, S.Mat",
+    "Sulis Sulastri, S.Pd",
+    "Widiya Dewi Lestari, S.Kom"
 ];
 
 const DAFTAR_SUPERVISOR = [
     "Dr. Riza Pertiwi, M.Pd",
-    "Dra. Hj. Brimayanti",
+    "Dra. Hj. Brimayanti", 
     "Luky, S.Pt"
 ];
 
 const DAFTAR_MAPEL = [
-    "Pendidikan Agama Islam", "Bahasa Sunda", "Pendidikan Agama Kristen",
-    "Pendidikan Kewarganegaraan", "Bahasa Indonesia", "Matematika",
-    "Matematika Tk. Lanjut", "Fisika", "Kimia", "Biologi", "Sosiologi",
-    "Sejarah Peminatan", "Sejarah Indonesia", "Ekonomi", "Kewirausahaan",
-    "Geografi", "Bahasa Inggris TK. Lanjut", "Bahasa Inggris",
-    "Pendidikan Jasmani Olah Raga & Kesehatan", "Informatika",
-    "Seni Budaya dan Kesenian", "Bahasa Korea", "BK"
+    "Bahasa Indonesia",
+    "Bahasa Inggris",
+    "Bahasa Inggris TK. Lanjut", 
+    "Bahasa Korea",
+    "Bahasa Sunda",
+    "Biologi",
+    "BK",
+    "Ekonomi",
+    "Fisika",
+    "Geografi",
+    "Informatika",
+    "Kewirausahaan",
+    "Kimia",
+    "Matematika",
+    "Matematika Tk. Lanjut",
+    "Pendidikan Agama Islam",
+    "Pendidikan Agama Kristen",
+    "Pendidikan Jasmani Olah Raga & Kesehatan",
+    "Pendidikan Kewarganegaraan",
+    "Sejarah Indonesia",
+    "Sejarah Peminatan", 
+    "Seni Budaya dan Kesenian",
+    "Sosiologi"
 ];
 
 const DAFTAR_KELAS_FASE = [
-    "10 SMA A/Fase E", "10 SMA B/Fase E", "11 SMA A Umum/Fase F",
-    "11 SMA B Umum/Fase F", "11 SMA A1/Fase F", "11 SMA A2/Fase F",
-    "11 SMA B/Fase F", "12 SMA IPA/Fase F", "12 SMA IPS/Fase F"
+    "10 SMA A/Fase E", 
+    "10 SMA B/Fase E", 
+    "11 SMA A Umum/Fase F",
+    "11 SMA A1/Fase F",
+    "11 SMA A2/Fase F",
+    "11 SMA B Umum/Fase F",
+    "11 SMA B/Fase F", 
+    "12 SMA IPA/Fase F", 
+    "12 SMA IPS/Fase F"
 ];
 
-// Konfigurasi Rubrik
+// Konfigurasi Rubrik - SUDAH DIPERBAIKI dengan sistem poin
 const RUBRIK = {
     "1. Perencanaan Pembelajaran": [
         {
@@ -58,7 +80,8 @@ const RUBRIK = {
                 "Tujuan pembelajaran dirumuskan dengan kata kerja operasional (sesuai CP/Fase)",
                 "Tujuan dikaitkan dengan manfaat nyata bagi siswa (kontekstual)",
                 "Tujuan ditulis/ditampilkan secara visual (di papan tulis/media digital)"
-            ]
+            ],
+            "maxScore": 4 // Maksimal 4 poin
         },
         {
             "indikator": "Integrasi 8 dimensi Profil Lulusan",
@@ -67,7 +90,8 @@ const RUBRIK = {
                 "Keterkaitan dimensi dengan kegiatan pembelajaran dijelaskan secara eksplisit",
                 "Nilai karakter yang diusung tampak dalam aktivitas atau proyek siswa",
                 "Guru memberi penguatan sikap sesuai dimensi profil lulusan selama pembelajaran"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Kegiatan pembelajaran sesuai model/metode yang dipilih",
@@ -76,24 +100,30 @@ const RUBRIK = {
                 "Aktivitas siswa mencerminkan penerapan model tersebut",
                 "Waktu dan alur kegiatan dirancang proporsional (pendahuluan–inti–penutup)",
                 "Refleksi/penilaian selaras dengan tujuan model pembelajaran"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Media & instrumen asesmen sudah dipersiapkan",
             "checklists": [
                 "Media pembelajaran relevan",
-                "Media sudah disiapkan sebelumnya",
+                "Media sudah disiapkan sebelumnya", 
                 "Instrumen asesmen",
                 "Media dan Asesmen"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "2. Pendahuluan": [
         {
             "indikator": "Pembukaan, salam, doa - Persiapan fisik dan psikis peserta didik",
             "checklists": [
-                "Salam dan sapa", "Doa", "Presensi", "Pengamatan kondisi kelas/siswa"
-            ]
+                "Salam dan sapa", 
+                "Doa", 
+                "Presensi", 
+                "Pengamatan kondisi kelas/siswa"
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Apersepsi & pemantik (mengaitkan pengetahuan awal)",
@@ -103,16 +133,18 @@ const RUBRIK = {
                 "Memberikan motivasi",
                 "Membuat suasana awal pembelajaran yang menyenangkan",
                 "Membangun optimisme siswa"
-            ]
+            ],
+            "maxScore": 4 // Tetap maksimal 4 meskipun ada 5 checklist
         },
         {
             "indikator": "Asesmen diagnostik (mengetahui kesiapan siswa)",
             "checklists": [
                 "Menayangkan media pengantar (gambar, cerita atau video)",
-                "Memberikan pertanyaan inti/Pemantik",
+                "Memberikan pertanyaan inti/Pemantik", 
                 "Menyampaikan tujuan",
                 "Menyampaikan Pembelajaran bermakna/Kontektual"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "3. Kegiatan Inti": [
@@ -121,9 +153,10 @@ const RUBRIK = {
             "checklists": [
                 "Memiliki data asesmen awal pembelajaran",
                 "Guru memahami perbedaan karakteristik belajar siswa",
-                "Guru memahami perbedaan kompetensi awal siswa",
+                "Guru memahami perbedaan kompetensi awal siswa", 
                 "Guru melaksanakan pembelajaran sesuai karakteristik siswa"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Menyajikan materi mudah diterima",
@@ -132,7 +165,8 @@ const RUBRIK = {
                 "Sesuai dengan tingkat kemampuan siswa",
                 "Dari yang mudah ke yang sulit",
                 "Dari yang kongkrit ke yang abstrak"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Strategi aktif (diskusi, proyek, gallery walk, dll.)",
@@ -141,19 +175,21 @@ const RUBRIK = {
                 "Menggunakan metode yang bervariatif",
                 "Menggunakan berbagai sumber",
                 "Mengembangkan pembelajaran yang efektif"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Pemanfaatan TIK & media digital",
             "checklists": [
                 "Menggunakan kelas virtual",
-                "Menggunakan media presentasi",
+                "Menggunakan media presentasi", 
                 "Menggunakan media suara/audio",
                 "Menggunakan media video",
-                "Menggunakan media Interaktif",
+                "Menggunakan media Interaktif", 
                 "Menggunakan media yang menyenangkan",
                 "Menggunakan media lainnya"
-            ]
+            ],
+            "maxScore": 4 // Tetap maksimal 4 meskipun ada 7 checklist
         },
         {
             "indikator": "Guru berperan sebagai fasilitator pembelajaran",
@@ -162,9 +198,10 @@ const RUBRIK = {
                 "Menggunakan model/pendekatan yang tepat",
                 "Mampu menyelesaikan permasalahan dikelas",
                 "Menunjukan kemampuan berpikir kritis",
-                "Menunjukan kemampuan berpikir kreatif",
+                "Menunjukan kemampuan berpikir kreatif", 
                 "Menunjukan kompetensi lainnya"
-            ]
+            ],
+            "maxScore": 4 // Tetap maksimal 4 meskipun ada 6 checklist
         },
         {
             "indikator": "Siswa aktif, kolaboratif, dan berpikir kritis",
@@ -173,7 +210,8 @@ const RUBRIK = {
                 "Siswa aktif merespon pertanyaan",
                 "Siswa aktif bertanya",
                 "Guru merespon dengan kualitas baik"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "4. Penutup": [
@@ -181,28 +219,31 @@ const RUBRIK = {
             "indikator": "Refleksi bersama siswa",
             "checklists": [
                 "Ada kegiatan refleksi proses pembelajaran",
-                "Ada kegiatan refleksi materi pembelajaran",
+                "Ada kegiatan refleksi materi pembelajaran", 
                 "Siswa merespon aktif kegiatan refleksi",
                 "Guru memberikan penguatan hasil diskusi refleksi"
-            ]
+            ],
+            "maxScore": 4
         },
         {
-            "indikator": "Kesimpulan pembelajaran disusun bersama",
+            "indikator": "Kesimpulan pembelajaran disusun bersama", 
             "checklists": [
                 "Guru mendorong siswa mengambil kesimpulan",
                 "Siswa merespon pengambilan kesimpulan",
                 "Terjadi diskusi pengambilan kesimpulan",
                 "Kesimpulan diambil bersama dan dikuatkan oleh guru"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Penguatan & tindak lanjut pembelajaran",
             "checklists": [
                 "Guru memberi tugas untuk menguatkan penguasaan materi hari ini",
                 "Guru menjelaskan materi atau topik yang akan datang",
-                "Guru mengkaitkan materi hari ini dengan materi yang akan datang",
+                "Guru mengkaitkan materi hari ini dengan materi yang akan datang", 
                 "Guru memberi saran agar siswa mempersiapkan untuk materi yang akan datang"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "5. Pengelolaan Kelas": [
@@ -213,16 +254,18 @@ const RUBRIK = {
                 "Penempatan guru dan siswa memungkinkan interaksi dua arah",
                 "Area kerja siswa rapi dan mudah berpindah sesuai aktivitas",
                 "Terdapat akses mudah terhadap media atau sumber belajar"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Suasana kelas kondusif & nyaman",
             "checklists": [
                 "Guru menciptakan iklim saling menghargai dan ramah",
                 "Siswa merasa aman menyampaikan pendapat",
-                "Kondisi fisik kelas (kebersihan, pencahayaan, ventilasi) baik",
+                "Kondisi fisik kelas (kebersihan, pencahayaan, ventilasi) baik", 
                 "Guru menegur/mengarahkan siswa dengan cara positif dan mendidik"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Manajemen waktu efektif",
@@ -231,7 +274,8 @@ const RUBRIK = {
                 "Transisi antar kegiatan berjalan lancar tanpa waktu terbuang",
                 "Guru mengatur durasi aktivitas sesuai kebutuhan siswa",
                 "Kegiatan selesai tepat waktu dengan hasil belajar tercapai"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Semua siswa terlibat dalam pembelajaran",
@@ -240,7 +284,8 @@ const RUBRIK = {
                 "Ada variasi strategi agar semua siswa berpartisipasi",
                 "Guru memperhatikan dan menindaklanjuti siswa yang pasif",
                 "Siswa menunjukkan antusiasme dan keterlibatan nyata dalam kegiatan"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "6. Penilaian Pembelajaran": [
@@ -248,10 +293,11 @@ const RUBRIK = {
             "indikator": "Asesmen beragam (as, for, of learning)",
             "checklists": [
                 "Asesmen dilakukan selama proses (for learning)",
-                "Asesmen juga dilakukan di akhir kegiatan (of learning)",
+                "Asesmen juga dilakukan di akhir kegiatan (of learning)", 
                 "Asesmen digunakan untuk memandu langkah berikutnya (as learning)",
                 "Variasi instrumen: observasi, proyek, kuis, jurnal, refleksi, dsb."
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Instrumen penilaian jelas (rubrik, ceklis, dsb.)",
@@ -260,16 +306,18 @@ const RUBRIK = {
                 "Rubrik/ceklis menunjukkan kriteria dan indikator yang terukur",
                 "Siswa memahami kriteria penilaian yang digunakan",
                 "Instrumen digunakan secara konsisten selama asesmen"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Fokus penilaian pada proses & hasil belajar",
             "checklists": [
                 "Guru mengamati proses kerja/berpikir siswa",
                 "Penilaian mencakup keterampilan, sikap, dan pengetahuan",
-                "Siswa mendapat kesempatan memperbaiki hasil berdasarkan proses",
+                "Siswa mendapat kesempatan memperbaiki hasil berdasarkan proses", 
                 "Guru menilai secara adil dan proporsional antara proses dan hasil"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Umpan balik (feedback) konstruktif diberikan",
@@ -278,7 +326,8 @@ const RUBRIK = {
                 "Disampaikan dengan bahasa positif dan memotivasi",
                 "Menjelaskan kelebihan dan area yang perlu diperbaiki",
                 "Siswa diberi kesempatan menindaklanjuti atau memperbaiki hasilnya"
-            ]
+            ],
+            "maxScore": 4
         }
     ],
     "7. Nilai Tambah / Inovasi": [
@@ -289,16 +338,18 @@ const RUBRIK = {
                 "Guru menggunakan contoh kasus atau fenomena kontekstual",
                 "Siswa dapat mengekspresikan pendapat sesuai pengalaman pribadi",
                 "Aktivitas pembelajaran menumbuhkan relevansi dan makna belajar"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Kolaborasi dengan orang tua/komunitas",
             "checklists": [
                 "Ada komunikasi aktif dengan orang tua tentang kegiatan belajar",
                 "Guru mengundang partisipasi komunitas (narasumber, mitra, dsb.)",
-                "Produk atau proyek siswa melibatkan dukungan eksternal",
+                "Produk atau proyek siswa melibatkan dukungan eksternal", 
                 "Kolaborasi memberi nilai tambah pada hasil belajar siswa"
-            ]
+            ],
+            "maxScore": 4
         },
         {
             "indikator": "Integrasi nilai karakter & spiritual",
@@ -307,7 +358,8 @@ const RUBRIK = {
                 "Aktivitas pembelajaran mengandung nilai karakter",
                 "Siswa diberi ruang untuk refleksi nilai-nilai kehidupan atau spiritual",
                 "Penilaian mencakup aspek sikap dan karakter"
-            ]
+            ],
+            "maxScore": 4
         }
     ]
 };
@@ -381,7 +433,7 @@ function generateRubrik() {
             const skorDisplay = document.createElement('span');
             skorDisplay.className = 'skor-display';
             skorDisplay.id = `skor_${komponen.replace(/\s+/g, '_')}_${idx}`;
-            skorDisplay.textContent = 'Skor: 0';
+            skorDisplay.textContent = 'Skor: 0/4';
             header.appendChild(skorDisplay);
             
             indikatorCard.appendChild(header);
@@ -400,7 +452,7 @@ function generateRubrik() {
                 checkbox.dataset.indikator = idx;
                 checkbox.dataset.checklist = checklistIdx;
                 checkbox.addEventListener('change', () => {
-                    hitungSkorIndikator(komponen, idx, indikator.checklists.length);
+                    hitungSkorIndikator(komponen, idx);
                     saveDraft();
                 });
                 
@@ -421,7 +473,9 @@ function generateRubrik() {
     }
 }
 
-function hitungSkorIndikator(komponen, indikatorIndex, totalChecklists) {
+// FUNGSI HITUNG SKOR YANG SUDAH DIPERBAIKI
+function hitungSkorIndikator(komponen, indikatorIndex) {
+    const indikator = RUBRIK[komponen][indikatorIndex];
     const checkboxes = document.querySelectorAll(
         `input[data-komponen="${komponen}"][data-indikator="${indikatorIndex}"]`
     );
@@ -431,19 +485,19 @@ function hitungSkorIndikator(komponen, indikatorIndex, totalChecklists) {
         if (checkbox.checked) checkedCount++;
     });
     
-    // Hitung skor berdasarkan persentase
-    let skor = 0;
-    const persentase = checkedCount / totalChecklists;
+    // SETIAP CHECKLIST YANG DICENTANG = 1 POIN
+    let skor = checkedCount;
     
-    if (persentase === 1) skor = 4;
-    else if (persentase >= 0.75) skor = 3;
-    else if (persentase >= 0.5) skor = 2;
-    else if (persentase >= 0.25) skor = 1;
+    // JIKA LEBIH DARI MAKSIMAL, SET KE MAKSIMAL
+    const maxScore = indikator.maxScore || 4;
+    if (skor > maxScore) {
+        skor = maxScore;
+    }
     
     // Update display skor
     const skorDisplay = document.getElementById(`skor_${komponen.replace(/\s+/g, '_')}_${indikatorIndex}`);
     if (skorDisplay) {
-        skorDisplay.textContent = `Skor: ${skor}`;
+        skorDisplay.textContent = `Skor: ${skor}/${maxScore}`;
         skorDisplay.className = `skor-display skor-${skor}`;
     }
     
@@ -568,11 +622,13 @@ function generateLaporan() {
     }
 }
 
+// FUNGSI PROCESS LAPORAN YANG SUDAH DIPERBAIKI
 function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_perbaikan) {
-    // Hitung skor
+    // Hitung skor dengan sistem baru
     const skorKomponen = {};
     let totalSkor = 0;
     let totalIndikator = 0;
+    let totalMaksimal = 0;
     
     for (const [komponen, indikators] of Object.entries(RUBRIK)) {
         skorKomponen[komponen] = 0;
@@ -581,9 +637,19 @@ function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_p
         indikators.forEach((indikator, idx) => {
             const key = `${komponen}_${idx}`;
             if (checklists[key]) {
-                const skor = hitungSkor(checklists[key]);
+                // Hitung skor berdasarkan jumlah checklist yang dicentang
+                const checkedCount = checklists[key].filter(v => v).length;
+                let skor = checkedCount;
+                
+                // Batasi skor maksimal
+                const maxScore = indikator.maxScore || 4;
+                if (skor > maxScore) {
+                    skor = maxScore;
+                }
+                
                 skorKomponen[komponen] += skor;
                 totalSkor += skor;
+                totalMaksimal += maxScore;
                 indikatorCount++;
                 totalIndikator++;
             }
@@ -603,23 +669,13 @@ function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_p
         skor_komponen: skorKomponen,
         total_skor: totalSkor,
         total_indikator: totalIndikator,
+        total_maksimal: totalMaksimal,
         rata_rata: rataRataKeseluruhan,
         kategori: kategoriKeseluruhan,
         analisis_kekuatan,
         analisis_perbaikan,
         tanggal_generate: new Date().toLocaleString('id-ID')
     };
-}
-
-function hitungSkor(checklistValues) {
-    const totalTercentang = checklistValues.filter(v => v).length;
-    const totalChecklist = checklistValues.length;
-    
-    if (totalTercentang === totalChecklist) return 4;
-    else if (totalTercentang >= totalChecklist * 0.75) return 3;
-    else if (totalTercentang >= totalChecklist * 0.5) return 2;
-    else if (totalTercentang >= totalChecklist * 0.25) return 1;
-    else return 0;
 }
 
 function kategoriNilai(r) {
@@ -652,7 +708,7 @@ function tampilkanLaporan(laporan) {
             
             <div class="score-summary">
                 <h3>Ringkasan Nilai</h3>
-                <p><strong>Total Skor:</strong> ${laporan.total_skor} dari ${laporan.total_indikator * 4} (maksimal)</p>
+                <p><strong>Total Skor:</strong> ${laporan.total_skor} dari ${laporan.total_maksimal} (maksimal)</p>
                 <p><strong>Rata-rata Keseluruhan:</strong> ${laporan.rata_rata.toFixed(2)}</p>
                 <p><strong>Kategori:</strong> <span class="badge ${laporan.kategori.toLowerCase().replace(' ', '-')}">${laporan.kategori}</span></p>
             </div>
@@ -824,7 +880,7 @@ function loadDraft() {
             // Recalculate scores
             for (const [komponen, indikators] of Object.entries(RUBRIK)) {
                 indikators.forEach((indikator, idx) => {
-                    hitungSkorIndikator(komponen, idx, indikator.checklists.length);
+                    hitungSkorIndikator(komponen, idx);
                 });
             }
             
