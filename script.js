@@ -312,19 +312,18 @@ const RUBRIK = {
     ]
 };
 
-// State Management
-let currentData = {
-    identitas: {},
-    checklists: {},
-    analisis: {}
-};
-
 // Inisialisasi Aplikasi
 document.addEventListener('DOMContentLoaded', function() {
     initApp();
 });
 
 function initApp() {
+    // Setup event listener untuk login
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleLogin();
+    });
+    
     // Set tanggal hari ini
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('tanggal_supervisi').value = today;
@@ -341,12 +340,13 @@ function initApp() {
     // Load saved draft
     loadDraft();
     
-    // Setup event listeners
-    setupEventListeners();
+    // Cek jika sudah login
+    checkLoginStatus();
 }
 
 function populateDropdown(elementId, data) {
     const select = document.getElementById(elementId);
+    select.innerHTML = '<option value="">Pilih...</option>';
     data.forEach(item => {
         const option = document.createElement('option');
         option.value = item;
@@ -421,7 +421,6 @@ function generateRubrik() {
     }
 }
 
-// Fungsi Utilitas
 function hitungSkorIndikator(komponen, indikatorIndex, totalChecklists) {
     const checkboxes = document.querySelectorAll(
         `input[data-komponen="${komponen}"][data-indikator="${indikatorIndex}"]`
@@ -451,42 +450,58 @@ function hitungSkorIndikator(komponen, indikatorIndex, totalChecklists) {
     return skor;
 }
 
-function hitungSkor(checklistValues) {
-    const totalTercentang = checklistValues.filter(v => v).length;
-    const totalChecklist = checklistValues.length;
+function handleLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
     
-    if (totalTercentang === totalChecklist) return 4;
-    else if (totalTercentang >= totalChecklist * 0.75) return 3;
-    else if (totalTercentang >= totalChecklist * 0.5) return 2;
-    else if (totalTercentang >= totalChecklist * 0.25) return 1;
-    else return 0;
+    if (username === 'pakguru' && password === 'bajuri39') {
+        // Simpan status login di localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('username', username);
+        
+        // Tampilkan aplikasi utama
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('mainApp').classList.remove('hidden');
+    } else {
+        alert('Username atau password salah!\\n\\nDefault login:\\nUsername: pakguru\\nPassword: bajuri39');
+    }
 }
 
-function kategoriNilai(r) {
-    if (r < 2) return "Perlu Peningkatan";
-    else if (r < 3) return "Cukup";
-    else if (r < 3.5) return "Baik";
-    return "Sangat Baik";
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('mainApp').classList.remove('hidden');
+    }
 }
 
-// Navigation
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
+    document.getElementById('loginModal').style.display = 'flex';
+    document.getElementById('mainApp').classList.add('hidden');
+    
+    // Reset form
+    document.getElementById('loginForm').reset();
+}
+
 function openTab(tabName) {
-    // Hide all tab contents
+    // Sembunyikan semua tab content
     const tabContents = document.getElementsByClassName('tab-content');
     for (let i = 0; i < tabContents.length; i++) {
         tabContents[i].classList.remove('active');
     }
-
-    // Remove active class from all tab buttons
+    
+    // Non-aktifkan semua tab buttons
     const tabButtons = document.getElementsByClassName('tab-button');
     for (let i = 0; i < tabButtons.length; i++) {
         tabButtons[i].classList.remove('active');
     }
-
-    // Show the specific tab content
+    
+    // Tampilkan tab yang dipilih
     document.getElementById(tabName).classList.add('active');
     
-    // Add active class to the clicked button
+    // Aktifkan button yang dipilih
     event.currentTarget.classList.add('active');
     
     // Jika pindah ke tab laporan, generate preview
@@ -495,7 +510,18 @@ function openTab(tabName) {
     }
 }
 
-// Data Collection
+function kumpulkanDataIdentitas() {
+    return {
+        nama_guru: document.getElementById('nama_guru').value,
+        mapel: document.getElementById('mapel').value,
+        kelas_fase: document.getElementById('kelas_fase').value,
+        topik_materi: document.getElementById('topik_materi').value,
+        jml_jam: document.getElementById('jml_jam').value,
+        tanggal_supervisi: document.getElementById('tanggal_supervisi').value,
+        nama_supervisor: document.getElementById('nama_supervisor').value
+    };
+}
+
 function kumpulkanDataChecklist() {
     const data = {};
     
@@ -514,20 +540,7 @@ function kumpulkanDataChecklist() {
     return data;
 }
 
-function kumpulkanDataIdentitas() {
-    return {
-        nama_guru: document.getElementById('nama_guru').value,
-        mapel: document.getElementById('mapel').value,
-        kelas_fase: document.getElementById('kelas_fase').value,
-        topik_materi: document.getElementById('topik_materi').value,
-        jml_jam: document.getElementById('jml_jam').value,
-        tanggal_supervisi: document.getElementById('tanggal_supervisi').value,
-        nama_supervisor: document.getElementById('nama_supervisor').value
-    };
-}
-
-// Laporan Generation
-async function generateLaporan() {
+function generateLaporan() {
     const identitas = kumpulkanDataIdentitas();
     const checklists = kumpulkanDataChecklist();
     const analisis_kekuatan = document.getElementById('analisis_kekuatan').value;
@@ -535,7 +548,7 @@ async function generateLaporan() {
     
     // Validasi data
     if (!identitas.nama_guru || !identitas.mapel || !identitas.kelas_fase) {
-        showAlert('Harap lengkapi data identitas terlebih dahulu!', 'warning');
+        alert('Harap lengkapi data identitas terlebih dahulu!');
         openTab('identitas');
         return;
     }
@@ -543,15 +556,12 @@ async function generateLaporan() {
     showLoading(true);
     
     try {
-        // Simulasi processing delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
         const laporanData = processLaporanData(identitas, checklists, analisis_kekuatan, analisis_perbaikan);
         tampilkanLaporan(laporanData);
         
-        showAlert('Laporan berhasil di-generate!', 'success');
+        alert('Laporan berhasil di-generate!');
     } catch (error) {
-        showAlert('Terjadi kesalahan: ' + error.message, 'error');
+        alert('Terjadi kesalahan: ' + error.message);
     } finally {
         showLoading(false);
     }
@@ -598,6 +608,24 @@ function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_p
         analisis_perbaikan,
         tanggal_generate: new Date().toLocaleString('id-ID')
     };
+}
+
+function hitungSkor(checklistValues) {
+    const totalTercentang = checklistValues.filter(v => v).length;
+    const totalChecklist = checklistValues.length;
+    
+    if (totalTercentang === totalChecklist) return 4;
+    else if (totalTercentang >= totalChecklist * 0.75) return 3;
+    else if (totalTercentang >= totalChecklist * 0.5) return 2;
+    else if (totalTercentang >= totalChecklist * 0.25) return 1;
+    else return 0;
+}
+
+function kategoriNilai(r) {
+    if (r < 2) return "Perlu Peningkatan";
+    else if (r < 3) return "Cukup";
+    else if (r < 3.5) return "Baik";
+    return "Sangat Baik";
 }
 
 function tampilkanLaporan(laporan) {
@@ -702,13 +730,12 @@ function generateLaporanPreview() {
     }
 }
 
-// Download PDF
 async function downloadPDF() {
     const { jsPDF } = window.jspdf;
     const laporanContent = document.querySelector('.laporan-content');
     
     if (!laporanContent) {
-        showAlert('Silakan generate laporan terlebih dahulu!', 'warning');
+        alert('Silakan generate laporan terlebih dahulu!');
         return;
     }
     
@@ -743,15 +770,14 @@ async function downloadPDF() {
         const fileName = `laporan_supervisi_${namaGuru.replace(/\s+/g, '_')}.pdf`;
         pdf.save(fileName);
         
-        showAlert('Laporan berhasil diunduh!', 'success');
+        alert('Laporan berhasil diunduh!');
     } catch (error) {
-        showAlert('Error saat mengunduh PDF: ' + error.message, 'error');
+        alert('Error saat mengunduh PDF: ' + error.message);
     } finally {
         showLoading(false);
     }
 }
 
-// Save/Load Draft
 function saveDraft() {
     const draft = {
         identitas: kumpulkanDataIdentitas(),
@@ -798,19 +824,12 @@ function loadDraft() {
             document.getElementById('analisis_kekuatan').value = draft.analisis.kekuatan || '';
             document.getElementById('analisis_perbaikan').value = draft.analisis.perbaikan || '';
             
-            console.log('Draft loaded successfully');
         } catch (error) {
             console.error('Error loading draft:', error);
         }
     }
 }
 
-function clearDraft() {
-    localStorage.removeItem('supervisi_draft');
-    showAlert('Draft berhasil dihapus!', 'success');
-}
-
-// Utility Functions
 function showLoading(show) {
     const loading = document.getElementById('loading');
     if (show) {
@@ -819,23 +838,3 @@ function showLoading(show) {
         loading.classList.add('hidden');
     }
 }
-
-function showAlert(message, type = 'info') {
-    // Remove existing alerts
-    const existingAlerts = document.querySelectorAll('.custom-alert');
-    existingAlerts.forEach(alert => alert.remove());
-    
-    const alert = document.createElement('div');
-    alert.className = `custom-alert alert-${type}`;
-    alert.innerHTML = `
-        <div class="alert-content">
-            <i class="fas fa-${getAlertIcon(type)}"></i>
-            <span>${message}</span>
-            <button onclick="this.parentElement.parentElement.remove()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    `;
-    
-    // Add styles
-    alert.style.css
