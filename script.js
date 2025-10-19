@@ -690,6 +690,9 @@ function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_p
     const rataRataKeseluruhan = totalIndikator > 0 ? totalSkor / totalIndikator : 0;
     const kategoriKeseluruhan = kategoriNilai(rataRataKeseluruhan);
     
+    // Generate rangkuman apresiasi
+    const rangkumanApresiasi = generateRangkumanApresiasi(rataRataKeseluruhan, kategoriKeseluruhan, analisis_kekuatan, analisis_perbaikan);
+    
     return {
         identitas,
         skor_komponen: skorKomponen,
@@ -700,6 +703,7 @@ function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_p
         kategori: kategoriKeseluruhan,
         analisis_kekuatan,
         analisis_perbaikan,
+        rangkuman_apresiasi: rangkumanApresiasi,
         tanggal_generate: new Date().toLocaleString('id-ID')
     };
 }
@@ -709,6 +713,33 @@ function kategoriNilai(r) {
     else if (r < 3) return "Cukup";
     else if (r < 3.5) return "Baik";
     return "Sangat Baik";
+}
+
+function generateRangkumanApresiasi(rataRata, kategori, kekuatan, perbaikan) {
+    let rangkuman = "";
+    
+    switch(kategori) {
+        case "Sangat Baik":
+            rangkuman = `Supervisi ini menunjukkan performa yang luar biasa pada tingkat <strong>Sangat Baik</strong> dengan skor rata-rata ${rataRata.toFixed(2)}. Komitmen yang konsisten terhadap kualitas pembelajaran benar-benar terlihat dalam setiap aspek observasi. ${kekuatan ? `Praktik-praktik unggulan seperti ${kekuatan.split('.')[0].toLowerCase()} menunjukkan dedikasi yang tinggi terhadap pengembangan profesional.` : 'Kemampuan dalam mengintegrasikan berbagai strategi pembelajaran dan menciptakan lingkungan belajar yang inspiratif patut diacungi jempol.'} Dengan level performa ini, fokus dapat diarahkan pada pengembangan kepemimpinan instruksional dan berbagi praktik baik dengan rekan sejawat.`;
+            break;
+            
+        case "Baik":
+            rangkuman = `Supervisi ini menunjukkan performa yang solid pada tingkat <strong>Baik</strong> dengan skor rata-rata ${rataRata.toFixed(2)}. ${kekuatan ? `Aspek-aspek kuat seperti ${kekuatan.split('.')[0].toLowerCase()} menjadi fondasi yang kokoh untuk pengembangan lebih lanjut.` : 'Praktik-praktik pembelajaran yang efektif telah diterapkan dengan konsisten.'} ${perbaikan ? `Area pengembangan seperti ${perbaikan.split('.')[0].toLowerCase()} bukanlah kelemahan, melainkan peluang berharga untuk meningkatkan dampak pembelajaran ke level berikutnya.` : 'Dengan semangat reflektif dan kolaboratif, kita dapat merencanakan tindak lanjut yang efektif untuk mencapai level Sangat Baik.'}`;
+            break;
+            
+        case "Cukup":
+            rangkuman = `Supervisi ini menunjukkan performa pada tingkat <strong>Cukup</strong> dengan skor rata-rata ${rataRata.toFixed(2)}. ${kekuatan ? `Poin positif yang menonjol adalah ${kekuatan.split('.')[0].toLowerCase()} yang dapat menjadi dasar untuk pengembangan.` : 'Terdapat potensi yang signifikan untuk berkembang dengan dukungan dan panduan yang tepat.'} ${perbaikan ? `Fokus utama pengembangan adalah pada ${perbaikan.split('.')[0].toLowerCase()} sebagai langkah strategis menuju peningkatan kualitas pembelajaran.` : 'Mari kita identifikasi strategi konkret untuk memperkuat praktik pembelajaran sehari-hari.'} Dengan komitmen dan dukungan yang berkelanjutan, pencapaian level Baik sangat mungkin diraih.`;
+            break;
+            
+        case "Perlu Peningkatan":
+            rangkuman = `Supervisi ini menunjukkan performa pada tingkat <strong>Perlu Peningkatan</strong> dengan skor rata-rata ${rataRata.toFixed(2)}. ${kekuatan ? `Meskipun demikian, apresiasi diberikan untuk ${kekuatan.split('.')[0].toLowerCase()} yang menunjukkan potensi perkembangan.` : 'Setiap perjalanan dimulai dengan langkah pertama, dan komitmen untuk berkembang adalah kunci kesuksesan.'} ${perbaikan ? `Fokus utama adalah membangun fondasi yang kuat melalui ${perbaikan.split('.')[0].toLowerCase()} sebagai prioritas pengembangan.` : 'Kami siap memberikan dukungan penuh melalui coaching, pelatihan, dan resources yang dibutuhkan.'} Bersama-sama, kita dapat merancang rencana pengembangan yang terstruktur dan achievable.`;
+            break;
+            
+        default:
+            rangkuman = `Supervisi ini menunjukkan performa dengan skor rata-rata ${rataRata.toFixed(2)}. ${kekuatan ? `Aspek positif yang patut diapresiasi adalah ${kekuatan.split('.')[0].toLowerCase()}.` : ''} ${perbaikan ? `Area pengembangan fokus pada ${perbaikan.split('.')[0].toLowerCase()}.` : ''} Mari kita bekerja sama untuk merancang strategi pengembangan yang efektif.`;
+    }
+    
+    return rangkuman;
 }
 
 function tampilkanLaporan(laporan) {
@@ -738,6 +769,13 @@ function tampilkanLaporan(laporan) {
                 <p><strong>Total Skor:</strong> ${laporan.total_skor} dari ${laporan.total_maksimal} (maksimal)</p>
                 <p><strong>Rata-rata Keseluruhan:</strong> ${laporan.rata_rata.toFixed(2)}</p>
                 <p><strong>Kategori:</strong> <span class="badge ${laporan.kategori.toLowerCase().replace(' ', '-')}">${laporan.kategori}</span></p>
+            </div>
+            
+            <div class="rangkuman-apresiasi">
+                <h3>📊 Rangkuman & Apresiasi</h3>
+                <div class="apresiasi-content">
+                    ${laporan.rangkuman_apresiasi}
+                </div>
             </div>
             
             <h2>B. Rekapitulasi Skor per Komponen</h2>
@@ -774,8 +812,23 @@ function tampilkanLaporan(laporan) {
                 <div class="analisis-content">${formatAnalisis(laporan.analisis_perbaikan)}</div>
             </div>
             
+            <div class="ttd-section">
+                <div class="ttd-guru">
+                    <p>Mengetahui,</p>
+                    <p>Guru yang Disupervisi</p>
+                    <div class="ttd-space"></div>
+                    <p><strong>${laporan.identitas.nama_guru}</strong></p>
+                </div>
+                
+                <div class="ttd-supervisor">
+                    <p>${formatTanggal(laporan.identitas.tanggal_supervisi)}</p>
+                    <p>Supervisor</p>
+                    <div class="ttd-space"></div>
+                    <p><strong>${laporan.identitas.nama_supervisor}</strong></p>
+                </div>
+            </div>
+            
             <div class="laporan-footer">
-                <p><em>Laporan di-generate secara otomatis pada: ${laporan.tanggal_generate}</em></p>
                 <p><strong>Dikembangkan oleh:</strong> Pak Guru Luky, S.Pt - Wakil Kepala Sekolah Bidang Kurikulum SMA Genesis Medicare</p>
             </div>
         </div>
