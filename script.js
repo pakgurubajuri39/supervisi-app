@@ -454,6 +454,7 @@ function handleLogin() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
+    // Default login (tidak ditampilkan di UI)
     if (username === 'pakguru' && password === 'bajuri39') {
         // Simpan status login di localStorage
         localStorage.setItem('isLoggedIn', 'true');
@@ -635,7 +636,7 @@ function tampilkanLaporan(laporan) {
         <div class="laporan-content">
             <div class="laporan-header">
                 <h1>INSTRUMEN SUPERVISI PEMBELAJARAN</h1>
-                <p><strong>SMA GENESIS MEDICARE</strong><br>TP. 2025/2026</p>
+                <p><strong>SMA GENESIS MEDICARE</strong><br>Tahun Pelajaran 2025/2026</p>
             </div>
             
             <h2>A. Identitas Guru</h2>
@@ -645,7 +646,7 @@ function tampilkanLaporan(laporan) {
                 <tr><td>Kelas/Fase</td><td>${laporan.identitas.kelas_fase}</td></tr>
                 <tr><td>Topik/Materi</td><td>${laporan.identitas.topik_materi}</td></tr>
                 <tr><td>Jumlah Jam</td><td>${laporan.identitas.jml_jam}</td></tr>
-                <tr><td>Tanggal Supervisi</td><td>${laporan.identitas.tanggal_supervisi}</td></tr>
+                <tr><td>Tanggal Supervisi</td><td>${formatTanggal(laporan.identitas.tanggal_supervisi)}</td></tr>
                 <tr><td>Nama Supervisor</td><td>${laporan.identitas.nama_supervisor}</td></tr>
             </table>
             
@@ -656,10 +657,10 @@ function tampilkanLaporan(laporan) {
                 <p><strong>Kategori:</strong> <span class="badge ${laporan.kategori.toLowerCase().replace(' ', '-')}">${laporan.kategori}</span></p>
             </div>
             
-            <h2>D. Rekapitulasi Skor</h2>
+            <h2>B. Rekapitulasi Skor per Komponen</h2>
             <table class="identity-table">
                 <tr style="background-color: #1e3a8a; color: white;">
-                    <th style="padding: 10px; text-align: left;">Komponen</th>
+                    <th style="padding: 10px; text-align: left;">Komponen Penilaian</th>
                     <th style="padding: 10px; text-align: center;">Skor Rata-rata</th>
                     <th style="padding: 10px; text-align: center;">Kategori</th>
                 </tr>
@@ -681,22 +682,28 @@ function tampilkanLaporan(laporan) {
     html += `
             </table>
             
-            <h2>E. Analisis Kinerja Mendalam</h2>
+            <h2>C. Analisis Kinerja Mendalam</h2>
             <div class="analisis-section">
                 <h3>✅ Kekuatan yang Menonjol</h3>
                 <div class="analisis-content">${formatAnalisis(laporan.analisis_kekuatan)}</div>
                 
-                <h3>🎯 Area Fokus untuk Pertumbuhan</h3>
+                <h3>🎯 Area Pengembangan untuk Pertumbuhan</h3>
                 <div class="analisis-content">${formatAnalisis(laporan.analisis_perbaikan)}</div>
             </div>
             
             <div class="laporan-footer">
-                <p><em>Laporan di-generate pada: ${laporan.tanggal_generate}</em></p>
+                <p><em>Laporan di-generate secara otomatis pada: ${laporan.tanggal_generate}</em></p>
+                <p><strong>Dikembangkan oleh:</strong> Pak Guru Luky, S.Pt - Wakil Kepala Sekolah Bidang Kurikulum SMA Genesis Medicare</p>
             </div>
         </div>
     `;
     
     preview.innerHTML = html;
+}
+
+function formatTanggal(tanggal) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(tanggal).toLocaleDateString('id-ID', options);
 }
 
 function formatAnalisis(text) {
@@ -767,7 +774,7 @@ async function downloadPDF() {
         }
         
         const namaGuru = document.getElementById('nama_guru').value || 'supervisi';
-        const fileName = `laporan_supervisi_${namaGuru.replace(/\s+/g, '_')}.pdf`;
+        const fileName = `Laporan_Supervisi_${namaGuru.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
         pdf.save(fileName);
         
         alert('Laporan berhasil diunduh!');
@@ -790,6 +797,7 @@ function saveDraft() {
     };
     
     localStorage.setItem('supervisi_draft', JSON.stringify(draft));
+    alert('Draft berhasil disimpan!');
 }
 
 function loadDraft() {
