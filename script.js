@@ -81,7 +81,7 @@ const RUBRIK = {
                 "Tujuan dikaitkan dengan manfaat nyata bagi siswa (kontekstual)",
                 "Tujuan ditulis/ditampilkan secara visual (di papan tulis/media digital)"
             ],
-            "maxScore": 4 // Maksimal 4 poin
+            "maxScore": 4
         },
         {
             "indikator": "Integrasi 8 dimensi Profil Lulusan",
@@ -131,10 +131,9 @@ const RUBRIK = {
                 "Mengecek pemahaman siswa materi prasyarat",
                 "Mengkaitkan materi dengan pengetahuan sebelumnya",
                 "Memberikan motivasi",
-                "Membuat suasana awal pembelajaran yang menyenangkan",
                 "Membangun optimisme siswa"
             ],
-            "maxScore": 4 // Tetap maksimal 4 meskipun ada 5 checklist
+            "maxScore": 4
         },
         {
             "indikator": "Asesmen diagnostik (mengetahui kesiapan siswa)",
@@ -189,7 +188,7 @@ const RUBRIK = {
                 "Menggunakan media yang menyenangkan",
                 "Menggunakan media lainnya"
             ],
-            "maxScore": 4 // Tetap maksimal 4 meskipun ada 7 checklist
+            "maxScore": 4
         },
         {
             "indikator": "Guru berperan sebagai fasilitator pembelajaran",
@@ -201,7 +200,7 @@ const RUBRIK = {
                 "Menunjukan kemampuan berpikir kreatif", 
                 "Menunjukan kompetensi lainnya"
             ],
-            "maxScore": 4 // Tetap maksimal 4 meskipun ada 6 checklist
+            "maxScore": 4
         },
         {
             "indikator": "Siswa aktif, kolaboratif, dan berpikir kritis",
@@ -371,14 +370,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initApp() {
     // Setup event listener untuk login
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        handleLogin();
-    });
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+    }
     
     // Set tanggal hari ini
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('tanggal_supervisi').value = today;
+    const tanggalSupervisi = document.getElementById('tanggal_supervisi');
+    if (tanggalSupervisi) {
+        const today = new Date().toISOString().split('T')[0];
+        tanggalSupervisi.value = today;
+    }
     
     // Populate dropdowns
     populateDropdown('nama_guru', DAFTAR_GURU);
@@ -398,6 +403,8 @@ function initApp() {
 
 function populateDropdown(elementId, data) {
     const select = document.getElementById(elementId);
+    if (!select) return;
+    
     select.innerHTML = '<option value="">Pilih...</option>';
     data.forEach(item => {
         const option = document.createElement('option');
@@ -409,6 +416,8 @@ function populateDropdown(elementId, data) {
 
 function generateRubrik() {
     const container = document.getElementById('rubrik-container');
+    if (!container) return;
+    
     container.innerHTML = '';
     
     for (const [komponen, indikators] of Object.entries(RUBRIK)) {
@@ -473,7 +482,6 @@ function generateRubrik() {
     }
 }
 
-// FUNGSI HITUNG SKOR YANG SUDAH DIPERBAIKI
 function hitungSkorIndikator(komponen, indikatorIndex) {
     const indikator = RUBRIK[komponen][indikatorIndex];
     const checkboxes = document.querySelectorAll(
@@ -505,18 +513,23 @@ function hitungSkorIndikator(komponen, indikatorIndex) {
 }
 
 function handleLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    
+    if (!username || !password) return;
     
     // Default login (tidak ditampilkan di UI)
-    if (username === 'pakguru' && password === 'bajuri39') {
+    if (username.value === 'pakguru' && password.value === 'bajuri39') {
         // Simpan status login di localStorage
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('username', username);
+        localStorage.setItem('username', username.value);
         
         // Tampilkan aplikasi utama
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('mainApp').classList.remove('hidden');
+        const loginModal = document.getElementById('loginModal');
+        const mainApp = document.getElementById('mainApp');
+        
+        if (loginModal) loginModal.style.display = 'none';
+        if (mainApp) mainApp.classList.remove('hidden');
     } else {
         alert('Username atau password salah!');
     }
@@ -525,19 +538,27 @@ function handleLogin() {
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('mainApp').classList.remove('hidden');
+        const loginModal = document.getElementById('loginModal');
+        const mainApp = document.getElementById('mainApp');
+        
+        if (loginModal) loginModal.style.display = 'none';
+        if (mainApp) mainApp.classList.remove('hidden');
     }
 }
 
 function logout() {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('username');
-    document.getElementById('loginModal').style.display = 'flex';
-    document.getElementById('mainApp').classList.add('hidden');
+    
+    const loginModal = document.getElementById('loginModal');
+    const mainApp = document.getElementById('mainApp');
+    
+    if (loginModal) loginModal.style.display = 'flex';
+    if (mainApp) mainApp.classList.add('hidden');
     
     // Reset form
-    document.getElementById('loginForm').reset();
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) loginForm.reset();
 }
 
 function openTab(tabName) {
@@ -554,10 +575,15 @@ function openTab(tabName) {
     }
     
     // Tampilkan tab yang dipilih
-    document.getElementById(tabName).classList.add('active');
+    const targetTab = document.getElementById(tabName);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
     
     // Aktifkan button yang dipilih
-    event.currentTarget.classList.add('active');
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
     
     // Jika pindah ke tab laporan, generate preview
     if (tabName === 'laporan') {
@@ -567,13 +593,13 @@ function openTab(tabName) {
 
 function kumpulkanDataIdentitas() {
     return {
-        nama_guru: document.getElementById('nama_guru').value,
-        mapel: document.getElementById('mapel').value,
-        kelas_fase: document.getElementById('kelas_fase').value,
-        topik_materi: document.getElementById('topik_materi').value,
-        jml_jam: document.getElementById('jml_jam').value,
-        tanggal_supervisi: document.getElementById('tanggal_supervisi').value,
-        nama_supervisor: document.getElementById('nama_supervisor').value
+        nama_guru: document.getElementById('nama_guru')?.value || '',
+        mapel: document.getElementById('mapel')?.value || '',
+        kelas_fase: document.getElementById('kelas_fase')?.value || '',
+        topik_materi: document.getElementById('topik_materi')?.value || '',
+        jml_jam: document.getElementById('jml_jam')?.value || '',
+        tanggal_supervisi: document.getElementById('tanggal_supervisi')?.value || '',
+        nama_supervisor: document.getElementById('nama_supervisor')?.value || ''
     };
 }
 
@@ -598,8 +624,8 @@ function kumpulkanDataChecklist() {
 function generateLaporan() {
     const identitas = kumpulkanDataIdentitas();
     const checklists = kumpulkanDataChecklist();
-    const analisis_kekuatan = document.getElementById('analisis_kekuatan').value;
-    const analisis_perbaikan = document.getElementById('analisis_perbaikan').value;
+    const analisis_kekuatan = document.getElementById('analisis_kekuatan')?.value || '';
+    const analisis_perbaikan = document.getElementById('analisis_perbaikan')?.value || '';
     
     // Validasi data
     if (!identitas.nama_guru || !identitas.mapel || !identitas.kelas_fase) {
@@ -616,13 +642,13 @@ function generateLaporan() {
         
         alert('Laporan berhasil di-generate!');
     } catch (error) {
+        console.error('Error generating report:', error);
         alert('Terjadi kesalahan: ' + error.message);
     } finally {
         showLoading(false);
     }
 }
 
-// FUNGSI PROCESS LAPORAN YANG SUDAH DIPERBAIKI
 function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_perbaikan) {
     // Hitung skor dengan sistem baru
     const skorKomponen = {};
@@ -687,6 +713,7 @@ function kategoriNilai(r) {
 
 function tampilkanLaporan(laporan) {
     const preview = document.getElementById('laporanPreview');
+    if (!preview) return;
     
     let html = `
         <div class="laporan-content">
@@ -758,6 +785,7 @@ function tampilkanLaporan(laporan) {
 }
 
 function formatTanggal(tanggal) {
+    if (!tanggal) return '-';
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return new Date(tanggal).toLocaleDateString('id-ID', options);
 }
@@ -774,9 +802,11 @@ function formatAnalisis(text) {
 }
 
 function generateLaporanPreview() {
+    const preview = document.getElementById('laporanPreview');
+    if (!preview) return;
+    
     const identitas = kumpulkanDataIdentitas();
     if (identitas.nama_guru && identitas.mapel) {
-        const preview = document.getElementById('laporanPreview');
         preview.innerHTML = `
             <div style="text-align: center; padding: 50px;">
                 <i class="fas fa-check-circle" style="font-size: 3em; color: #10b981; margin-bottom: 20px;"></i>
@@ -794,7 +824,6 @@ function generateLaporanPreview() {
 }
 
 async function downloadPDF() {
-    const { jsPDF } = window.jspdf;
     const laporanContent = document.querySelector('.laporan-content');
     
     if (!laporanContent) {
@@ -805,6 +834,12 @@ async function downloadPDF() {
     showLoading(true);
     
     try {
+        // Pastikan jsPDF tersedia
+        if (typeof window.jspdf === 'undefined') {
+            throw new Error('PDF library tidak tersedia');
+        }
+        
+        const { jsPDF } = window.jspdf;
         const canvas = await html2canvas(laporanContent, {
             scale: 2,
             useCORS: true,
@@ -829,12 +864,13 @@ async function downloadPDF() {
             heightLeft -= pageHeight;
         }
         
-        const namaGuru = document.getElementById('nama_guru').value || 'supervisi';
+        const namaGuru = document.getElementById('nama_guru')?.value || 'supervisi';
         const fileName = `Laporan_Supervisi_${namaGuru.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
         pdf.save(fileName);
         
         alert('Laporan berhasil diunduh!');
     } catch (error) {
+        console.error('Error downloading PDF:', error);
         alert('Error saat mengunduh PDF: ' + error.message);
     } finally {
         showLoading(false);
@@ -846,14 +882,14 @@ function saveDraft() {
         identitas: kumpulkanDataIdentitas(),
         checklists: kumpulkanDataChecklist(),
         analisis: {
-            kekuatan: document.getElementById('analisis_kekuatan').value,
-            perbaikan: document.getElementById('analisis_perbaikan').value
+            kekuatan: document.getElementById('analisis_kekuatan')?.value || '',
+            perbaikan: document.getElementById('analisis_perbaikan')?.value || ''
         },
         timestamp: new Date().toISOString()
     };
     
     localStorage.setItem('supervisi_draft', JSON.stringify(draft));
-    alert('Draft berhasil disimpan!');
+    // Tidak menampilkan alert untuk menghindari gangguan
 }
 
 function loadDraft() {
@@ -885,8 +921,11 @@ function loadDraft() {
             }
             
             // Load analisis
-            document.getElementById('analisis_kekuatan').value = draft.analisis.kekuatan || '';
-            document.getElementById('analisis_perbaikan').value = draft.analisis.perbaikan || '';
+            const analisisKekuatan = document.getElementById('analisis_kekuatan');
+            const analisisPerbaikan = document.getElementById('analisis_perbaikan');
+            
+            if (analisisKekuatan) analisisKekuatan.value = draft.analisis.kekuatan || '';
+            if (analisisPerbaikan) analisisPerbaikan.value = draft.analisis.perbaikan || '';
             
         } catch (error) {
             console.error('Error loading draft:', error);
@@ -896,6 +935,8 @@ function loadDraft() {
 
 function showLoading(show) {
     const loading = document.getElementById('loading');
+    if (!loading) return;
+    
     if (show) {
         loading.classList.remove('hidden');
     } else {
