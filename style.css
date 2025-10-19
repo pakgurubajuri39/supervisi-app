@@ -732,3 +732,11 @@ header h1 {
         padding: 0;
     }
 }
+.login-info {
+    display: none; /* Sembunyikan dari tampilan normal */
+}
+
+/* Tampilkan hanya saat hover atau dengan cara khusus */
+.modal-content:hover .login-info {
+    display: block;
+}
