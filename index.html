@@ -29,36 +29,18 @@
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </form>
-            <!-- Login Modal -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <div class="login-header">
-            <h2><i class="fas fa-chalkboard-teacher"></i> Login Supervisor</h2>
-            <p>SMA Genesis Medicare</p>
         </div>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
-        <!-- BAGIAN LOGIN INFO DIHAPUS -->
     </div>
-</div>
+
     <!-- Main Application -->
     <div id="mainApp" class="hidden">
         <div class="container">
             <header>
                 <div class="header-content">
-                    <h1><i class="fas fa-chalkboard-teacher"></i> Aplikasi Supervisi Pembelajaran</h1>
-                    <p class="subtitle">SMA Genesis Medicare - TP. 2025/2026</p>
+                    <div class="header-title">
+                        <h1><i class="fas fa-chalkboard-teacher"></i> Aplikasi Supervisi Pembelajaran</h1>
+                        <p class="subtitle">SMA Genesis Medicare - TP. 2025/2026</p>
+                    </div>
                     <button class="btn-logout" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
@@ -215,6 +197,15 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Footer Credit -->
+            <footer class="footer-credit">
+                <div class="credit-content">
+                    <p>Dikembangkan oleh: <strong>Pak Guru Luky, S.Pt</strong></p>
+                    <p>Wakil Kepala Sekolah Bidang Kurikulum SMA Genesis Medicare</p>
+                    <p class="copyright">© 2025 Hak Cipta Dilindungi Undang-Undang</p>
+                </div>
+            </footer>
         </div>
     </div>
 
