@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Supervisi Pembelajaran - SMA Genesis Medicare</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="login-header">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Login Supervisor</h2>
+                <p>SMA Genesis Medicare</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            <div class="login-info">
+                <p><strong>Default Login:</strong><br>Username: pakguru<br>Password: bajuri39</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <h1><i class="fas fa-chalkboard-teacher"></i> Aplikasi Supervisi Pembelajaran</h1>
+                    <p class="subtitle">SMA Genesis Medicare - TP. 2025/2026</p>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </header>
+
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab('identitas')">
+                    <i class="fas fa-user"></i> Identitas & Penilaian
+                </button>
+                <button class="tab-button" onclick="openTab('analisis')">
+                    <i class="fas fa-chart-line"></i> Analisis Kualitatif
+                </button>
+                <button class="tab-button" onclick="openTab('laporan')">
+                    <i class="fas fa-file-alt"></i> Buat Laporan
+                </button>
+            </div>
+
+            <!-- Tab 1: Identitas & Penilaian -->
+            <div id="identitas" class="tab-content active">
+                <div class="form-section">
+                    <h2><i class="fas fa-user-graduate"></i> Identitas Guru</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nama_guru">Nama Guru:</label>
+                            <select id="nama_guru" class="form-control" required>
+                                <option value="">Pilih Guru</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mapel">Mata Pelajaran:</label>
+                            <select id="mapel" class="form-control" required>
+                                <option value="">Pilih Mata Pelajaran</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kelas_fase">Kelas/Fase:</label>
+                            <select id="kelas_fase" class="form-control" required>
+                                <option value="">Pilih Kelas/Fase</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="topik_materi">Topik/Materi:</label>
+                            <input type="text" id="topik_materi" class="form-control" placeholder="Masukkan topik/materi pembelajaran" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jml_jam">Jumlah Jam:</label>
+                            <select id="jml_jam" class="form-control" required>
+                                <option value="1 JP">1 JP</option>
+                                <option value="2 JP" selected>2 JP</option>
+                                <option value="3 JP">3 JP</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tanggal_supervisi">Tanggal Supervisi:</label>
+                            <input type="date" id="tanggal_supervisi" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nama_supervisor">Nama Supervisor:</label>
+                            <select id="nama_supervisor" class="form-control" required>
+                                <option value="">Pilih Supervisor</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-clipboard-check"></i> Rubrik Penilaian Supervisi Pembelajaran</h2>
+                    <div id="rubrik-container">
+                        <!-- Rubrik akan di-generate oleh JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-primary" onclick="openTab('analisis')">
+                        Lanjut ke Analisis <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 2: Analisis Kualitatif -->
+            <div id="analisis" class="tab-content">
+                <div class="form-section">
+                    <h2><i class="fas fa-analytics"></i> Analisis Kualitatif</h2>
+                    
+                    <div class="analisis-grid">
+                        <div class="analisis-group">
+                            <h3><i class="fas fa-check-circle success"></i> Analisis Kekuatan</h3>
+                            <p class="analisis-desc">Praktik Baik yang Teramati</p>
+                            <textarea id="analisis_kekuatan" class="analisis-textarea" 
+                                      placeholder="Contoh:
+• Tujuan pembelajaran disampaikan secara eksplisit dan terukur
+• Penggunaan media digital yang menarik perhatian siswa
+• Interaksi guru-siswa yang positif dan membangun"></textarea>
+                        </div>
+                        
+                        <div class="analisis-group">
+                            <h3><i class="fas fa-bullseye primary"></i> Analisis Area Pertumbuhan</h3>
+                            <p class="analisis-desc">Peluang Pengembangan</p>
+                            <textarea id="analisis_perbaikan" class="analisis-textarea" 
+                                      placeholder="Contoh:
+• Pembukaan pelajaran masih bersifat rutin
+• Perlu variasi strategi untuk siswa yang pasif
+• Umpan balik dapat lebih spesifik"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="openTab('identitas')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <button class="btn btn-primary" onclick="openTab('laporan')">
+                        Buat Laporan <i class="fas fa-file-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 3: Buat Laporan -->
+            <div id="laporan" class="tab-content">
+                <div class="form-section">
+                    <h2><i class="fas fa-file-contract"></i> Buat & Unduh Laporan</h2>
+                    
+                    <div class="laporan-preview" id="laporanPreview">
+                        <div class="placeholder-content">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Laporan Akan Muncul di Sini</h3>
+                            <p>Isi semua data di tab sebelumnya, lalu klik "Generate Laporan"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-success" onclick="generateLaporan()">
+                            <i class="fas fa-sync"></i> Generate Laporan
+                        </button>
+                        <button class="btn btn-download" onclick="downloadPDF()" id="downloadBtn">
+                            <i class="fas fa-download"></i> Unduh Laporan PDF
+                        </button>
+                        <button class="btn btn-info" onclick="saveDraft()">
+                            <i class="fas fa-save"></i> Simpan Draft
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="openTab('analisis')">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Analisis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Memproses...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
