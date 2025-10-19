@@ -463,7 +463,7 @@ function handleLogin() {
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('mainApp').classList.remove('hidden');
     } else {
-        alert('Username atau password salah!\\n\\nDefault login:\\nUsername: pakguru\\nPassword: bajuri39');
+        alert('Username atau password salah!');
     }
 }
 
