@@ -1,372 +1,732 @@
-// Data untuk dropdown
-const dataGuru = [
-    "Budi Santoso, S.Pd",
-    "Siti Rahayu, M.Pd", 
-    "Ahmad Fauzi, S.Pd",
-    "Dewi Lestari, M.Pd",
-    "Rizki Pratama, S.Pd"
+// Data Master
+const DAFTAR_GURU = [
+    "H. Gustian Maskat, S.Ag, M.M",
+    "Husnul Khotimah, S.Ag",
+    "Endang Ruhimat, S.HI",
+    "Branka Yohanes F. Sitompul, S.Th",
+    "Deni Lamria, S.H Gr",
+    "Nuraeni, S.Pd",
+    "Budi Setiawan, M.Pd",
+    "Lilik Hendrayanto, S.Pd Gr",
+    "Rina Ajizah, S.Mat",
+    "Aji Wibowo, S.Pd",
+    "Drs. Sumanto",
+    "Muslihah Amalia, S.Pd",
+    "Luky, S.Pt",
+    "Nuris Watunnaba, S.Pd",
+    "Sulis Sulastri, S.Pd",
+    "Reynard Cahyono, B.Sc",
+    "Gunawan Surya Kusuma, S.T, M.M",
+    "Fernansius, S.S, M.Pd",
+    "Ms. Grace Sihombing, S.Pd",
+    "M. Arbi Maulana, S.Pd",
+    "Jasmine Rifdah Nafilla, S.Kom",
+    "Widiya Dewi Lestari, S.Kom",
+    "Alma Arifany, S.Li",
+    "Muhammad Naufal Luthfi, S.Pd"
 ];
 
-const dataMapel = [
-    "Matematika",
-    "Bahasa Indonesia", 
-    "Bahasa Inggris",
-    "IPA",
-    "IPS",
-    "Pendidikan Agama",
-    "PKn",
-    "Seni Budaya",
-    "PJOK",
-    "Prakarya"
+const DAFTAR_SUPERVISOR = [
+    "Dr. Riza Pertiwi, M.Pd",
+    "Dra. Hj. Brimayanti",
+    "Luky, S.Pt"
 ];
 
-const dataKelas = [
-    "Kelas X - Fase E",
-    "Kelas XI - Fase F", 
-    "Kelas XII - Fase F"
+const DAFTAR_MAPEL = [
+    "Pendidikan Agama Islam", "Bahasa Sunda", "Pendidikan Agama Kristen",
+    "Pendidikan Kewarganegaraan", "Bahasa Indonesia", "Matematika",
+    "Matematika Tk. Lanjut", "Fisika", "Kimia", "Biologi", "Sosiologi",
+    "Sejarah Peminatan", "Sejarah Indonesia", "Ekonomi", "Kewirausahaan",
+    "Geografi", "Bahasa Inggris TK. Lanjut", "Bahasa Inggris",
+    "Pendidikan Jasmani Olah Raga & Kesehatan", "Informatika",
+    "Seni Budaya dan Kesenian", "Bahasa Korea", "BK"
 ];
 
-const dataSupervisor = [
-    "Dr. Anwar Kasim, M.Pd",
-    "Drs. Hasan Basri",
-    "Dra. Maya Sari, M.Pd"
+const DAFTAR_KELAS_FASE = [
+    "10 SMA A/Fase E", "10 SMA B/Fase E", "11 SMA A Umum/Fase F",
+    "11 SMA B Umum/Fase F", "11 SMA A1/Fase F", "11 SMA A2/Fase F",
+    "11 SMA B/Fase F", "12 SMA IPA/Fase F", "12 SMA IPS/Fase F"
 ];
 
-// Data rubrik penilaian
-const rubrikData = [
-    {
-        id: 1,
-        aspek: "Perencanaan Pembelajaran",
-        deskripsi: "Kesesuaian RPP dengan kurikulum, tujuan pembelajaran, dan langkah-langkah kegiatan",
-        skor: 0
-    },
-    {
-        id: 2, 
-        aspek: "Pelaksanaan Pembelajaran",
-        deskripsi: "Keterlaksanaan pembelajaran sesuai RPP, pengelolaan kelas, dan alokasi waktu",
-        skor: 0
-    },
-    {
-        id: 3,
-        aspek: "Penggunaan Media/Strategi",
-        deskripsi: "Kesesuaian media dan strategi dengan tujuan pembelajaran serta karakteristik siswa", 
-        skor: 0
-    },
-    {
-        id: 4,
-        aspek: "Penilaian Pembelajaran",
-        deskripsi: "Kesesuaian teknik penilaian dengan tujuan pembelajaran dan pemberian umpan balik",
-        skor: 0
-    },
-    {
-        id: 5,
-        aspek: "Interaksi Pembelajaran", 
-        deskripsi: "Kualitas interaksi guru-siswa dan siswa-siswa dalam proses pembelajaran",
-        skor: 0
-    }
-];
+// Konfigurasi Rubrik
+const RUBRIK = {
+    "1. Perencanaan Pembelajaran": [
+        {
+            "indikator": "Tujuan pembelajaran jelas & sesuai Capaian Pembelajaran (CP)",
+            "checklists": [
+                "Tujuan pembelajaran disampaikan di awal kegiatan",
+                "Tujuan pembelajaran dirumuskan dengan kata kerja operasional (sesuai CP/Fase)",
+                "Tujuan dikaitkan dengan manfaat nyata bagi siswa (kontekstual)",
+                "Tujuan ditulis/ditampilkan secara visual (di papan tulis/media digital)"
+            ]
+        },
+        {
+            "indikator": "Integrasi 8 dimensi Profil Lulusan",
+            "checklists": [
+                "Guru mencantumkan minimal satu dimensi Profil Lulusan dalam RPP/ATP",
+                "Keterkaitan dimensi dengan kegiatan pembelajaran dijelaskan secara eksplisit",
+                "Nilai karakter yang diusung tampak dalam aktivitas atau proyek siswa",
+                "Guru memberi penguatan sikap sesuai dimensi profil lulusan selama pembelajaran"
+            ]
+        },
+        {
+            "indikator": "Kegiatan pembelajaran sesuai model/metode yang dipilih",
+            "checklists": [
+                "Langkah pembelajaran sesuai sintaks model yang dipilih",
+                "Aktivitas siswa mencerminkan penerapan model tersebut",
+                "Waktu dan alur kegiatan dirancang proporsional (pendahuluan–inti–penutup)",
+                "Refleksi/penilaian selaras dengan tujuan model pembelajaran"
+            ]
+        },
+        {
+            "indikator": "Media & instrumen asesmen sudah dipersiapkan",
+            "checklists": [
+                "Media pembelajaran relevan",
+                "Media sudah disiapkan sebelumnya",
+                "Instrumen asesmen",
+                "Media dan Asesmen"
+            ]
+        }
+    ],
+    "2. Pendahuluan": [
+        {
+            "indikator": "Pembukaan, salam, doa - Persiapan fisik dan psikis peserta didik",
+            "checklists": [
+                "Salam dan sapa", "Doa", "Presensi", "Pengamatan kondisi kelas/siswa"
+            ]
+        },
+        {
+            "indikator": "Apersepsi & pemantik (mengaitkan pengetahuan awal)",
+            "checklists": [
+                "Mengecek pemahaman siswa materi prasyarat",
+                "Mengkaitkan materi dengan pengetahuan sebelumnya",
+                "Memberikan motivasi",
+                "Membuat suasana awal pembelajaran yang menyenangkan",
+                "Membangun optimisme siswa"
+            ]
+        },
+        {
+            "indikator": "Asesmen diagnostik (mengetahui kesiapan siswa)",
+            "checklists": [
+                "Menayangkan media pengantar (gambar, cerita atau video)",
+                "Memberikan pertanyaan inti/Pemantik",
+                "Menyampaikan tujuan",
+                "Menyampaikan Pembelajaran bermakna/Kontektual"
+            ]
+        }
+    ],
+    "3. Kegiatan Inti": [
+        {
+            "indikator": "Pembelajaran berdiferensiasi sesuai kebutuhan siswa",
+            "checklists": [
+                "Memiliki data asesmen awal pembelajaran",
+                "Guru memahami perbedaan karakteristik belajar siswa",
+                "Guru memahami perbedaan kompetensi awal siswa",
+                "Guru melaksanakan pembelajaran sesuai karakteristik siswa"
+            ]
+        },
+        {
+            "indikator": "Menyajikan materi mudah diterima",
+            "checklists": [
+                "Dengan bahasa yang mudah diterima",
+                "Sesuai dengan tingkat kemampuan siswa",
+                "Dari yang mudah ke yang sulit",
+                "Dari yang kongkrit ke yang abstrak"
+            ]
+        },
+        {
+            "indikator": "Strategi aktif (diskusi, proyek, gallery walk, dll.)",
+            "checklists": [
+                "Pembelajaran yang menyenangkan",
+                "Menggunakan metode yang bervariatif",
+                "Menggunakan berbagai sumber",
+                "Mengembangkan pembelajaran yang efektif"
+            ]
+        },
+        {
+            "indikator": "Pemanfaatan TIK & media digital",
+            "checklists": [
+                "Menggunakan kelas virtual",
+                "Menggunakan media presentasi",
+                "Menggunakan media suara/audio",
+                "Menggunakan media video",
+                "Menggunakan media Interaktif",
+                "Menggunakan media yang menyenangkan",
+                "Menggunakan media lainnya"
+            ]
+        },
+        {
+            "indikator": "Guru berperan sebagai fasilitator pembelajaran",
+            "checklists": [
+                "Menguasai materi yang diajarkan",
+                "Menggunakan model/pendekatan yang tepat",
+                "Mampu menyelesaikan permasalahan dikelas",
+                "Menunjukan kemampuan berpikir kritis",
+                "Menunjukan kemampuan berpikir kreatif",
+                "Menunjukan kompetensi lainnya"
+            ]
+        },
+        {
+            "indikator": "Siswa aktif, kolaboratif, dan berpikir kritis",
+            "checklists": [
+                "Guru melakukan interaksi tanya jawab",
+                "Siswa aktif merespon pertanyaan",
+                "Siswa aktif bertanya",
+                "Guru merespon dengan kualitas baik"
+            ]
+        }
+    ],
+    "4. Penutup": [
+        {
+            "indikator": "Refleksi bersama siswa",
+            "checklists": [
+                "Ada kegiatan refleksi proses pembelajaran",
+                "Ada kegiatan refleksi materi pembelajaran",
+                "Siswa merespon aktif kegiatan refleksi",
+                "Guru memberikan penguatan hasil diskusi refleksi"
+            ]
+        },
+        {
+            "indikator": "Kesimpulan pembelajaran disusun bersama",
+            "checklists": [
+                "Guru mendorong siswa mengambil kesimpulan",
+                "Siswa merespon pengambilan kesimpulan",
+                "Terjadi diskusi pengambilan kesimpulan",
+                "Kesimpulan diambil bersama dan dikuatkan oleh guru"
+            ]
+        },
+        {
+            "indikator": "Penguatan & tindak lanjut pembelajaran",
+            "checklists": [
+                "Guru memberi tugas untuk menguatkan penguasaan materi hari ini",
+                "Guru menjelaskan materi atau topik yang akan datang",
+                "Guru mengkaitkan materi hari ini dengan materi yang akan datang",
+                "Guru memberi saran agar siswa mempersiapkan untuk materi yang akan datang"
+            ]
+        }
+    ],
+    "5. Pengelolaan Kelas": [
+        {
+            "indikator": "Tata ruang sesuai dengan kegiatan pembelajaran",
+            "checklists": [
+                "Tata ruang disesuaikan dengan model/metode pembelajaran",
+                "Penempatan guru dan siswa memungkinkan interaksi dua arah",
+                "Area kerja siswa rapi dan mudah berpindah sesuai aktivitas",
+                "Terdapat akses mudah terhadap media atau sumber belajar"
+            ]
+        },
+        {
+            "indikator": "Suasana kelas kondusif & nyaman",
+            "checklists": [
+                "Guru menciptakan iklim saling menghargai dan ramah",
+                "Siswa merasa aman menyampaikan pendapat",
+                "Kondisi fisik kelas (kebersihan, pencahayaan, ventilasi) baik",
+                "Guru menegur/mengarahkan siswa dengan cara positif dan mendidik"
+            ]
+        },
+        {
+            "indikator": "Manajemen waktu efektif",
+            "checklists": [
+                "Pembukaan, inti, dan penutup sesuai waktu yang direncanakan",
+                "Transisi antar kegiatan berjalan lancar tanpa waktu terbuang",
+                "Guru mengatur durasi aktivitas sesuai kebutuhan siswa",
+                "Kegiatan selesai tepat waktu dengan hasil belajar tercapai"
+            ]
+        },
+        {
+            "indikator": "Semua siswa terlibat dalam pembelajaran",
+            "checklists": [
+                "Guru memberikan kesempatan yang merata kepada seluruh siswa",
+                "Ada variasi strategi agar semua siswa berpartisipasi",
+                "Guru memperhatikan dan menindaklanjuti siswa yang pasif",
+                "Siswa menunjukkan antusiasme dan keterlibatan nyata dalam kegiatan"
+            ]
+        }
+    ],
+    "6. Penilaian Pembelajaran": [
+        {
+            "indikator": "Asesmen beragam (as, for, of learning)",
+            "checklists": [
+                "Asesmen dilakukan selama proses (for learning)",
+                "Asesmen juga dilakukan di akhir kegiatan (of learning)",
+                "Asesmen digunakan untuk memandu langkah berikutnya (as learning)",
+                "Variasi instrumen: observasi, proyek, kuis, jurnal, refleksi, dsb."
+            ]
+        },
+        {
+            "indikator": "Instrumen penilaian jelas (rubrik, ceklis, dsb.)",
+            "checklists": [
+                "Instrumen disiapkan sebelum kegiatan dimulai",
+                "Rubrik/ceklis menunjukkan kriteria dan indikator yang terukur",
+                "Siswa memahami kriteria penilaian yang digunakan",
+                "Instrumen digunakan secara konsisten selama asesmen"
+            ]
+        },
+        {
+            "indikator": "Fokus penilaian pada proses & hasil belajar",
+            "checklists": [
+                "Guru mengamati proses kerja/berpikir siswa",
+                "Penilaian mencakup keterampilan, sikap, dan pengetahuan",
+                "Siswa mendapat kesempatan memperbaiki hasil berdasarkan proses",
+                "Guru menilai secara adil dan proporsional antara proses dan hasil"
+            ]
+        },
+        {
+            "indikator": "Umpan balik (feedback) konstruktif diberikan",
+            "checklists": [
+                "Umpan balik diberikan segera setelah kegiatan atau tugas",
+                "Disampaikan dengan bahasa positif dan memotivasi",
+                "Menjelaskan kelebihan dan area yang perlu diperbaiki",
+                "Siswa diberi kesempatan menindaklanjuti atau memperbaiki hasilnya"
+            ]
+        }
+    ],
+    "7. Nilai Tambah / Inovasi": [
+        {
+            "indikator": "Pembelajaran kontekstual sesuai minat/isu siswa",
+            "checklists": [
+                "Materi dikaitkan dengan situasi kehidupan nyata siswa",
+                "Guru menggunakan contoh kasus atau fenomena kontekstual",
+                "Siswa dapat mengekspresikan pendapat sesuai pengalaman pribadi",
+                "Aktivitas pembelajaran menumbuhkan relevansi dan makna belajar"
+            ]
+        },
+        {
+            "indikator": "Kolaborasi dengan orang tua/komunitas",
+            "checklists": [
+                "Ada komunikasi aktif dengan orang tua tentang kegiatan belajar",
+                "Guru mengundang partisipasi komunitas (narasumber, mitra, dsb.)",
+                "Produk atau proyek siswa melibatkan dukungan eksternal",
+                "Kolaborasi memberi nilai tambah pada hasil belajar siswa"
+            ]
+        },
+        {
+            "indikator": "Integrasi nilai karakter & spiritual",
+            "checklists": [
+                "Guru mencontohkan sikap positif dalam perilaku sehari-hari",
+                "Aktivitas pembelajaran mengandung nilai karakter",
+                "Siswa diberi ruang untuk refleksi nilai-nilai kehidupan atau spiritual",
+                "Penilaian mencakup aspek sikap dan karakter"
+            ]
+        }
+    ]
+};
 
-// Inisialisasi aplikasi
+// State Management
+let currentData = {
+    identitas: {},
+    checklists: {},
+    analisis: {}
+};
+
+// Inisialisasi Aplikasi
 document.addEventListener('DOMContentLoaded', function() {
     initApp();
 });
 
 function initApp() {
-    populateDropdowns();
+    // Set tanggal hari ini
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tanggal_supervisi').value = today;
+    
+    // Populate dropdowns
+    populateDropdown('nama_guru', DAFTAR_GURU);
+    populateDropdown('mapel', DAFTAR_MAPEL);
+    populateDropdown('kelas_fase', DAFTAR_KELAS_FASE);
+    populateDropdown('nama_supervisor', DAFTAR_SUPERVISOR);
+    
+    // Generate rubrik
     generateRubrik();
-    setDefaultDate();
     
-    // Event listener untuk form login
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        handleLogin();
-    });
+    // Load saved draft
+    loadDraft();
     
-    // Cek jika sudah login
-    checkLoginStatus();
+    // Setup event listeners
+    setupEventListeners();
 }
 
-function populateDropdowns() {
-    // Populate dropdown guru
-    const selectGuru = document.getElementById('nama_guru');
-    dataGuru.forEach(guru => {
+function populateDropdown(elementId, data) {
+    const select = document.getElementById(elementId);
+    data.forEach(item => {
         const option = document.createElement('option');
-        option.value = guru;
-        option.textContent = guru;
-        selectGuru.appendChild(option);
-    });
-    
-    // Populate dropdown mapel
-    const selectMapel = document.getElementById('mapel');
-    dataMapel.forEach(mapel => {
-        const option = document.createElement('option');
-        option.value = mapel;
-        option.textContent = mapel;
-        selectMapel.appendChild(option);
-    });
-    
-    // Populate dropdown kelas
-    const selectKelas = document.getElementById('kelas_fase');
-    dataKelas.forEach(kelas => {
-        const option = document.createElement('option');
-        option.value = kelas;
-        option.textContent = kelas;
-        selectKelas.appendChild(option);
-    });
-    
-    // Populate dropdown supervisor
-    const selectSupervisor = document.getElementById('nama_supervisor');
-    dataSupervisor.forEach(supervisor => {
-        const option = document.createElement('option');
-        option.value = supervisor;
-        option.textContent = supervisor;
-        selectSupervisor.appendChild(option);
+        option.value = item;
+        option.textContent = item;
+        select.appendChild(option);
     });
 }
 
 function generateRubrik() {
     const container = document.getElementById('rubrik-container');
+    container.innerHTML = '';
     
-    rubrikData.forEach(item => {
-        const rubrikItem = document.createElement('div');
-        rubrikItem.className = 'rubrik-item';
-        rubrikItem.innerHTML = `
-            <div class="rubrik-header">
-                <div class="rubrik-title">${item.aspek}</div>
-                <div class="score-buttons">
-                    ${[1, 2, 3, 4].map(score => `
-                        <button type="button" class="score-btn ${score === 1 ? 'active' : ''}" 
-                                onclick="setScore(${item.id}, ${score})">
-                            ${score}
-                        </button>
-                    `).join('')}
-                </div>
-            </div>
-            <div class="rubrik-desc">${item.deskripsi}</div>
-        `;
-        container.appendChild(rubrikItem);
-    });
-}
-
-function setScore(itemId, score) {
-    // Update data
-    const item = rubrikData.find(r => r.id === itemId);
-    if (item) {
-        item.skor = score;
-    }
-    
-    // Update UI
-    const buttons = document.querySelectorAll(`.rubrik-item:nth-child(${itemId}) .score-btn`);
-    buttons.forEach((btn, index) => {
-        if (index === score - 1) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-}
-
-function setDefaultDate() {
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('tanggal_supervisi').value = today;
-}
-
-function handleLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    if (username === 'pakguru' && password === 'bajuri39') {
-        // Simpan status login di localStorage
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('username', username);
+    for (const [komponen, indikators] of Object.entries(RUBRIK)) {
+        const komponenDiv = document.createElement('div');
+        komponenDiv.className = 'komponen-group';
         
-        // Tampilkan aplikasi utama
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('mainApp').classList.remove('hidden');
-    } else {
-        alert('Username atau password salah!\\n\\nDefault login:\\nUsername: pakguru\\nPassword: bajuri39');
+        const komponenTitle = document.createElement('h3');
+        komponenTitle.textContent = komponen;
+        komponenDiv.appendChild(komponenTitle);
+        
+        indikators.forEach((indikator, idx) => {
+            const indikatorCard = document.createElement('div');
+            indikatorCard.className = 'indikator-card';
+            
+            const header = document.createElement('div');
+            header.className = 'indikator-header';
+            
+            const title = document.createElement('h4');
+            title.textContent = indikator.indikator;
+            header.appendChild(title);
+            
+            const skorDisplay = document.createElement('span');
+            skorDisplay.className = 'skor-display';
+            skorDisplay.id = `skor_${komponen.replace(/\s+/g, '_')}_${idx}`;
+            skorDisplay.textContent = 'Skor: 0';
+            header.appendChild(skorDisplay);
+            
+            indikatorCard.appendChild(header);
+            
+            const checklistGroup = document.createElement('div');
+            checklistGroup.className = 'checklist-group';
+            
+            indikator.checklists.forEach((checklist, checklistIdx) => {
+                const checklistItem = document.createElement('div');
+                checklistItem.className = 'checklist-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `check_${komponen.replace(/\s+/g, '_')}_${idx}_${checklistIdx}`;
+                checkbox.dataset.komponen = komponen;
+                checkbox.dataset.indikator = idx;
+                checkbox.dataset.checklist = checklistIdx;
+                checkbox.addEventListener('change', () => {
+                    hitungSkorIndikator(komponen, idx, indikator.checklists.length);
+                    saveDraft();
+                });
+                
+                const label = document.createElement('label');
+                label.htmlFor = checkbox.id;
+                label.textContent = checklist;
+                
+                checklistItem.appendChild(checkbox);
+                checklistItem.appendChild(label);
+                checklistGroup.appendChild(checklistItem);
+            });
+            
+            indikatorCard.appendChild(checklistGroup);
+            komponenDiv.appendChild(indikatorCard);
+        });
+        
+        container.appendChild(komponenDiv);
     }
 }
 
-function checkLoginStatus() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('mainApp').classList.remove('hidden');
-    }
-}
-
-function logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('username');
-    document.getElementById('loginModal').style.display = 'flex';
-    document.getElementById('mainApp').classList.add('hidden');
+// Fungsi Utilitas
+function hitungSkorIndikator(komponen, indikatorIndex, totalChecklists) {
+    const checkboxes = document.querySelectorAll(
+        `input[data-komponen="${komponen}"][data-indikator="${indikatorIndex}"]`
+    );
     
-    // Reset form
-    document.getElementById('loginForm').reset();
+    let checkedCount = 0;
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) checkedCount++;
+    });
+    
+    // Hitung skor berdasarkan persentase
+    let skor = 0;
+    const persentase = checkedCount / totalChecklists;
+    
+    if (persentase === 1) skor = 4;
+    else if (persentase >= 0.75) skor = 3;
+    else if (persentase >= 0.5) skor = 2;
+    else if (persentase >= 0.25) skor = 1;
+    
+    // Update display skor
+    const skorDisplay = document.getElementById(`skor_${komponen.replace(/\s+/g, '_')}_${indikatorIndex}`);
+    if (skorDisplay) {
+        skorDisplay.textContent = `Skor: ${skor}`;
+        skorDisplay.className = `skor-display skor-${skor}`;
+    }
+    
+    return skor;
 }
 
+function hitungSkor(checklistValues) {
+    const totalTercentang = checklistValues.filter(v => v).length;
+    const totalChecklist = checklistValues.length;
+    
+    if (totalTercentang === totalChecklist) return 4;
+    else if (totalTercentang >= totalChecklist * 0.75) return 3;
+    else if (totalTercentang >= totalChecklist * 0.5) return 2;
+    else if (totalTercentang >= totalChecklist * 0.25) return 1;
+    else return 0;
+}
+
+function kategoriNilai(r) {
+    if (r < 2) return "Perlu Peningkatan";
+    else if (r < 3) return "Cukup";
+    else if (r < 3.5) return "Baik";
+    return "Sangat Baik";
+}
+
+// Navigation
 function openTab(tabName) {
-    // Sembunyikan semua tab content
+    // Hide all tab contents
     const tabContents = document.getElementsByClassName('tab-content');
     for (let i = 0; i < tabContents.length; i++) {
         tabContents[i].classList.remove('active');
     }
-    
-    // Non-aktifkan semua tab buttons
+
+    // Remove active class from all tab buttons
     const tabButtons = document.getElementsByClassName('tab-button');
     for (let i = 0; i < tabButtons.length; i++) {
         tabButtons[i].classList.remove('active');
     }
-    
-    // Tampilkan tab yang dipilih
+
+    // Show the specific tab content
     document.getElementById(tabName).classList.add('active');
     
-    // Aktifkan button yang dipilih
+    // Add active class to the clicked button
     event.currentTarget.classList.add('active');
-}
-
-function generateLaporan() {
-    showLoading();
     
-    // Simulasi proses generate
-    setTimeout(() => {
-        const laporanData = collectLaporanData();
-        displayLaporanPreview(laporanData);
-        hideLoading();
-    }, 1500);
+    // Jika pindah ke tab laporan, generate preview
+    if (tabName === 'laporan') {
+        generateLaporanPreview();
+    }
 }
 
-function collectLaporanData() {
+// Data Collection
+function kumpulkanDataChecklist() {
+    const data = {};
+    
+    for (const [komponen, indikators] of Object.entries(RUBRIK)) {
+        indikators.forEach((indikator, idx) => {
+            const key = `${komponen}_${idx}`;
+            data[key] = [];
+            
+            indikator.checklists.forEach((checklist, checklistIdx) => {
+                const checkbox = document.getElementById(`check_${komponen.replace(/\s+/g, '_')}_${idx}_${checklistIdx}`);
+                data[key].push(checkbox ? checkbox.checked : false);
+            });
+        });
+    }
+    
+    return data;
+}
+
+function kumpulkanDataIdentitas() {
     return {
-        guru: document.getElementById('nama_guru').value,
+        nama_guru: document.getElementById('nama_guru').value,
         mapel: document.getElementById('mapel').value,
-        kelas: document.getElementById('kelas_fase').value,
-        topik: document.getElementById('topik_materi').value,
-        jam: document.getElementById('jml_jam').value,
-        tanggal: document.getElementById('tanggal_supervisi').value,
-        supervisor: document.getElementById('nama_supervisor').value,
-        rubrik: rubrikData,
-        kekuatan: document.getElementById('analisis_kekuatan').value,
-        perbaikan: document.getElementById('analisis_perbaikan').value,
-        totalSkor: rubrikData.reduce((sum, item) => sum + item.skor, 0),
-        rataRata: (rubrikData.reduce((sum, item) => sum + item.skor, 0) / rubrikData.length).toFixed(2)
+        kelas_fase: document.getElementById('kelas_fase').value,
+        topik_materi: document.getElementById('topik_materi').value,
+        jml_jam: document.getElementById('jml_jam').value,
+        tanggal_supervisi: document.getElementById('tanggal_supervisi').value,
+        nama_supervisor: document.getElementById('nama_supervisor').value
     };
 }
 
-function displayLaporanPreview(data) {
+// Laporan Generation
+async function generateLaporan() {
+    const identitas = kumpulkanDataIdentitas();
+    const checklists = kumpulkanDataChecklist();
+    const analisis_kekuatan = document.getElementById('analisis_kekuatan').value;
+    const analisis_perbaikan = document.getElementById('analisis_perbaikan').value;
+    
+    // Validasi data
+    if (!identitas.nama_guru || !identitas.mapel || !identitas.kelas_fase) {
+        showAlert('Harap lengkapi data identitas terlebih dahulu!', 'warning');
+        openTab('identitas');
+        return;
+    }
+    
+    showLoading(true);
+    
+    try {
+        // Simulasi processing delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const laporanData = processLaporanData(identitas, checklists, analisis_kekuatan, analisis_perbaikan);
+        tampilkanLaporan(laporanData);
+        
+        showAlert('Laporan berhasil di-generate!', 'success');
+    } catch (error) {
+        showAlert('Terjadi kesalahan: ' + error.message, 'error');
+    } finally {
+        showLoading(false);
+    }
+}
+
+function processLaporanData(identitas, checklists, analisis_kekuatan, analisis_perbaikan) {
+    // Hitung skor
+    const skorKomponen = {};
+    let totalSkor = 0;
+    let totalIndikator = 0;
+    
+    for (const [komponen, indikators] of Object.entries(RUBRIK)) {
+        skorKomponen[komponen] = 0;
+        let indikatorCount = 0;
+        
+        indikators.forEach((indikator, idx) => {
+            const key = `${komponen}_${idx}`;
+            if (checklists[key]) {
+                const skor = hitungSkor(checklists[key]);
+                skorKomponen[komponen] += skor;
+                totalSkor += skor;
+                indikatorCount++;
+                totalIndikator++;
+            }
+        });
+        
+        if (indikatorCount > 0) {
+            skorKomponen[komponen] = skorKomponen[komponen] / indikatorCount;
+        }
+    }
+    
+    // Hitung rata-rata
+    const rataRataKeseluruhan = totalIndikator > 0 ? totalSkor / totalIndikator : 0;
+    const kategoriKeseluruhan = kategoriNilai(rataRataKeseluruhan);
+    
+    return {
+        identitas,
+        skor_komponen: skorKomponen,
+        total_skor: totalSkor,
+        total_indikator: totalIndikator,
+        rata_rata: rataRataKeseluruhan,
+        kategori: kategoriKeseluruhan,
+        analisis_kekuatan,
+        analisis_perbaikan,
+        tanggal_generate: new Date().toLocaleString('id-ID')
+    };
+}
+
+function tampilkanLaporan(laporan) {
     const preview = document.getElementById('laporanPreview');
     
-    preview.innerHTML = `
+    let html = `
         <div class="laporan-content">
-            <div class="laporan-header" style="text-align: center; margin-bottom: 2rem;">
-                <h2 style="color: #1f2937; margin-bottom: 0.5rem;">LAPORAN SUPERVISI PEMBELAJARAN</h2>
-                <p style="color: #6b7280;">SMA Genesis Medicare - Tahun Pelajaran 2025/2026</p>
-                <hr style="margin: 1rem 0; border: 1px solid #e5e7eb;">
+            <div class="laporan-header">
+                <h1>INSTRUMEN SUPERVISI PEMBELAJARAN</h1>
+                <p><strong>SMA GENESIS MEDICARE</strong><br>TP. 2025/2026</p>
             </div>
             
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #374151; margin-bottom: 1rem;">Identitas</h3>
-                <table style="width: 100%; border-collapse: collapse;">
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb; width: 30%;"><strong>Nama Guru</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${data.guru}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Mata Pelajaran</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${data.mapel}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Kelas/Fase</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${data.kelas}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Topik/Materi</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${data.topik}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Supervisor</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${data.supervisor}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Tanggal</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">${formatDate(data.tanggal)}</td>
-                    </tr>
-                </table>
+            <h2>A. Identitas Guru</h2>
+            <table class="identity-table">
+                <tr><td>Nama Guru</td><td>${laporan.identitas.nama_guru}</td></tr>
+                <tr><td>Mata Pelajaran</td><td>${laporan.identitas.mapel}</td></tr>
+                <tr><td>Kelas/Fase</td><td>${laporan.identitas.kelas_fase}</td></tr>
+                <tr><td>Topik/Materi</td><td>${laporan.identitas.topik_materi}</td></tr>
+                <tr><td>Jumlah Jam</td><td>${laporan.identitas.jml_jam}</td></tr>
+                <tr><td>Tanggal Supervisi</td><td>${laporan.identitas.tanggal_supervisi}</td></tr>
+                <tr><td>Nama Supervisor</td><td>${laporan.identitas.nama_supervisor}</td></tr>
+            </table>
+            
+            <div class="score-summary">
+                <h3>Ringkasan Nilai</h3>
+                <p><strong>Total Skor:</strong> ${laporan.total_skor} dari ${laporan.total_indikator * 4} (maksimal)</p>
+                <p><strong>Rata-rata Keseluruhan:</strong> ${laporan.rata_rata.toFixed(2)}</p>
+                <p><strong>Kategori:</strong> <span class="badge ${laporan.kategori.toLowerCase().replace(' ', '-')}">${laporan.kategori}</span></p>
             </div>
             
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #374151; margin-bottom: 1rem;">Hasil Penilaian</h3>
-                <table style="width: 100%; border-collapse: collapse;">
-                    ${data.rubrik.map(item => `
-                        <tr>
-                            <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb; width: 70%;">${item.aspek}</td>
-                            <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb; text-align: center;">${item.skor}/4</td>
-                        </tr>
-                    `).join('')}
-                    <tr style="background: #f8fafc;">
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb;"><strong>Total Skor</strong></td>
-                        <td style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb; text-align: center;"><strong>${data.totalSkor}/20</strong></td>
-                    </tr>
-                    <tr style="background: #f8fafc;">
-                        <td style="padding: 0.5rem;"><strong>Rata-rata</strong></td>
-                        <td style="padding: 0.5rem; text-align: center;"><strong>${data.rataRata}</strong></td>
-                    </tr>
-                </table>
+            <h2>D. Rekapitulasi Skor</h2>
+            <table class="identity-table">
+                <tr style="background-color: #1e3a8a; color: white;">
+                    <th style="padding: 10px; text-align: left;">Komponen</th>
+                    <th style="padding: 10px; text-align: center;">Skor Rata-rata</th>
+                    <th style="padding: 10px; text-align: center;">Kategori</th>
+                </tr>
+    `;
+    
+    for (const [komponen, skor] of Object.entries(laporan.skor_komponen)) {
+        const kategori = kategoriNilai(skor);
+        html += `
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">${komponen}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; text-align: center; font-weight: bold;">${skor.toFixed(2)}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                    <span class="badge ${kategori.toLowerCase().replace(' ', '-')}">${kategori}</span>
+                </td>
+            </tr>
+        `;
+    }
+    
+    html += `
+            </table>
+            
+            <h2>E. Analisis Kinerja Mendalam</h2>
+            <div class="analisis-section">
+                <h3>✅ Kekuatan yang Menonjol</h3>
+                <div class="analisis-content">${formatAnalisis(laporan.analisis_kekuatan)}</div>
+                
+                <h3>🎯 Area Fokus untuk Pertumbuhan</h3>
+                <div class="analisis-content">${formatAnalisis(laporan.analisis_perbaikan)}</div>
             </div>
             
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #10b981; margin-bottom: 1rem;">Kekuatan yang Teramati</h3>
-                <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #10b981;">
-                    ${formatTextArea(data.kekuatan)}
-                </div>
-            </div>
-            
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #f59e0b; margin-bottom: 1rem;">Area Pertumbuhan</h3>
-                <div style="background: #fffbeb; padding: 1rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
-                    ${formatTextArea(data.perbaikan)}
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 2rem; color: #6b7280; font-size: 0.9rem;">
-                <p>Laporan ini dihasilkan secara otomatis oleh Sistem Supervisi Pembelajaran SMA Genesis Medicare</p>
+            <div class="laporan-footer">
+                <p><em>Laporan di-generate pada: ${laporan.tanggal_generate}</em></p>
             </div>
         </div>
     `;
-}
-
-function formatDate(dateString) {
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString('id-ID', options);
-}
-
-function formatTextArea(text) {
-    return text.replace(/\n/g, '<br>') || '<em>Belum diisi</em>';
-}
-
-function showLoading() {
-    document.getElementById('loading').classList.remove('hidden');
-}
-
-function hideLoading() {
-    document.getElementById('loading').classList.add('hidden');
-}
-
-function downloadPDF() {
-    showLoading();
     
-    // Gunakan html2canvas dan jsPDF untuk generate PDF
-    const element = document.getElementById('laporanPreview');
+    preview.innerHTML = html;
+}
+
+function formatAnalisis(text) {
+    if (!text) return '<p class="text-muted">Tidak ada analisis</p>';
+    return text.split('\n').map(line => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
+            return `<p style="margin: 5px 0; padding-left: 10px;">${trimmed}</p>`;
+        }
+        return `<p style="margin: 8px 0;">${trimmed}</p>`;
+    }).join('');
+}
+
+function generateLaporanPreview() {
+    const identitas = kumpulkanDataIdentitas();
+    if (identitas.nama_guru && identitas.mapel) {
+        const preview = document.getElementById('laporanPreview');
+        preview.innerHTML = `
+            <div style="text-align: center; padding: 50px;">
+                <i class="fas fa-check-circle" style="font-size: 3em; color: #10b981; margin-bottom: 20px;"></i>
+                <h3>Data Siap untuk Generate Laporan</h3>
+                <p>Klik tombol "Generate Laporan" untuk membuat laporan lengkap</p>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: left;">
+                    <p><strong>Guru:</strong> ${identitas.nama_guru}</p>
+                    <p><strong>Mapel:</strong> ${identitas.mapel}</p>
+                    <p><strong>Kelas:</strong> ${identitas.kelas_fase}</p>
+                    <p><strong>Topik:</strong> ${identitas.topik_materi}</p>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Download PDF
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const laporanContent = document.querySelector('.laporan-content');
     
-    html2canvas(element).then(canvas => {
+    if (!laporanContent) {
+        showAlert('Silakan generate laporan terlebih dahulu!', 'warning');
+        return;
+    }
+    
+    showLoading(true);
+    
+    try {
+        const canvas = await html2canvas(laporanContent, {
+            scale: 2,
+            useCORS: true,
+            logging: false
+        });
+        
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
         const imgWidth = 210;
         const pageHeight = 295;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         let heightLeft = imgHeight;
-        
         let position = 0;
         
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
@@ -379,13 +739,103 @@ function downloadPDF() {
             heightLeft -= pageHeight;
         }
         
-        pdf.save(`Laporan-Supervisi-${document.getElementById('nama_guru').value}-${new Date().toISOString().split('T')[0]}.pdf`);
-        hideLoading();
-    });
+        const namaGuru = document.getElementById('nama_guru').value || 'supervisi';
+        const fileName = `laporan_supervisi_${namaGuru.replace(/\s+/g, '_')}.pdf`;
+        pdf.save(fileName);
+        
+        showAlert('Laporan berhasil diunduh!', 'success');
+    } catch (error) {
+        showAlert('Error saat mengunduh PDF: ' + error.message, 'error');
+    } finally {
+        showLoading(false);
+    }
 }
 
+// Save/Load Draft
 function saveDraft() {
-    const data = collectLaporanData();
-    localStorage.setItem('draftSupervisi', JSON.stringify(data));
-    alert('Draft berhasil disimpan!');
+    const draft = {
+        identitas: kumpulkanDataIdentitas(),
+        checklists: kumpulkanDataChecklist(),
+        analisis: {
+            kekuatan: document.getElementById('analisis_kekuatan').value,
+            perbaikan: document.getElementById('analisis_perbaikan').value
+        },
+        timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('supervisi_draft', JSON.stringify(draft));
 }
+
+function loadDraft() {
+    const saved = localStorage.getItem('supervisi_draft');
+    if (saved) {
+        try {
+            const draft = JSON.parse(saved);
+            
+            // Load identitas
+            Object.keys(draft.identitas).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) element.value = draft.identitas[key];
+            });
+            
+            // Load checklists
+            Object.keys(draft.checklists).forEach(key => {
+                const [komponen, idx] = key.split('_');
+                draft.checklists[key].forEach((isChecked, checklistIdx) => {
+                    const checkbox = document.getElementById(`check_${komponen.replace(/\s+/g, '_')}_${idx}_${checklistIdx}`);
+                    if (checkbox) checkbox.checked = isChecked;
+                });
+            });
+            
+            // Recalculate scores
+            for (const [komponen, indikators] of Object.entries(RUBRIK)) {
+                indikators.forEach((indikator, idx) => {
+                    hitungSkorIndikator(komponen, idx, indikator.checklists.length);
+                });
+            }
+            
+            // Load analisis
+            document.getElementById('analisis_kekuatan').value = draft.analisis.kekuatan || '';
+            document.getElementById('analisis_perbaikan').value = draft.analisis.perbaikan || '';
+            
+            console.log('Draft loaded successfully');
+        } catch (error) {
+            console.error('Error loading draft:', error);
+        }
+    }
+}
+
+function clearDraft() {
+    localStorage.removeItem('supervisi_draft');
+    showAlert('Draft berhasil dihapus!', 'success');
+}
+
+// Utility Functions
+function showLoading(show) {
+    const loading = document.getElementById('loading');
+    if (show) {
+        loading.classList.remove('hidden');
+    } else {
+        loading.classList.add('hidden');
+    }
+}
+
+function showAlert(message, type = 'info') {
+    // Remove existing alerts
+    const existingAlerts = document.querySelectorAll('.custom-alert');
+    existingAlerts.forEach(alert => alert.remove());
+    
+    const alert = document.createElement('div');
+    alert.className = `custom-alert alert-${type}`;
+    alert.innerHTML = `
+        <div class="alert-content">
+            <i class="fas fa-${getAlertIcon(type)}"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add styles
+    alert.style.css
