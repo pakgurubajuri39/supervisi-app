@@ -250,7 +250,7 @@ const RUBRIK = {
             "indikator": "Tata ruang sesuai dengan kegiatan pembelajaran",
             "checklists": [
                 "Tata ruang disesuaikan dengan model/metode pembelajaran",
-                "Penempatan guru dan siswa memungkinkan interaksi dua arah",
+                "Penempatan guru dan siswa memungkinkan interaksi dua arazh",
                 "Area kerja siswa rapi dan mudah berpindah sesuai aktivitas",
                 "Terdapat akses mudah terhadap media atau sumber belajar"
             ],
@@ -771,13 +771,6 @@ function tampilkanLaporan(laporan) {
                 <p><strong>Kategori:</strong> <span class="badge ${laporan.kategori.toLowerCase().replace(' ', '-')}">${laporan.kategori}</span></p>
             </div>
             
-            <div class="rangkuman-apresiasi">
-                <h3>📊 Rangkuman & Apresiasi</h3>
-                <div class="apresiasi-content">
-                    ${laporan.rangkuman_apresiasi}
-                </div>
-            </div>
-            
             <h2>B. Rekapitulasi Skor per Komponen</h2>
             <table class="identity-table">
                 <tr style="background-color: #1e3a8a; color: white;">
@@ -812,19 +805,22 @@ function tampilkanLaporan(laporan) {
                 <div class="analisis-content">${formatAnalisis(laporan.analisis_perbaikan)}</div>
             </div>
             
-            <div class="ttd-section">
-                <div class="ttd-guru">
-                    <p>Mengetahui,</p>
-                    <p>Guru yang Disupervisi</p>
-                    <div class="ttd-space"></div>
-                    <p><strong>${laporan.identitas.nama_guru}</strong></p>
+            <div class="rangkuman-apresiasi">
+                <h3>📊 Rangkuman & Apresiasi</h3>
+                <div class="apresiasi-content">
+                    ${laporan.rangkuman_apresiasi}
+                </div>
+            </div>
+            
+            <div class="ttd-section" style="margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div class="ttd-guru" style="text-align: center;">
+                    <p style="margin-bottom: 60px;">Guru yang Disupervisi</p>
+                    <p style="border-top: 1px solid #000; padding-top: 5px; width: 200px;"><strong>${laporan.identitas.nama_guru}</strong></p>
                 </div>
                 
-                <div class="ttd-supervisor">
-                    <p>${formatTanggal(laporan.identitas.tanggal_supervisi)}</p>
-                    <p>Supervisor</p>
-                    <div class="ttd-space"></div>
-                    <p><strong>${laporan.identitas.nama_supervisor}</strong></p>
+                <div class="ttd-supervisor" style="text-align: center;">
+                    <p style="margin-bottom: 60px;">Supervisor</p>
+                    <p style="border-top: 1px solid #000; padding-top: 5px; width: 200px;"><strong>${laporan.identitas.nama_supervisor}</strong></p>
                 </div>
             </div>
             
